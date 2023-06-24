@@ -2,6 +2,8 @@
 # GeoPlugin
 This is a Minecraft Spigot plugin that adds features we use on our server at s.mcnsa.com.
 
+# Current Supported Minecraft Version: 1.20.1
+
 ## Modules
 All the content in this plugin is separated into different distinct modules. These modules can be disabled by finding the module you want to disable in the config file and setting it to false.
 
