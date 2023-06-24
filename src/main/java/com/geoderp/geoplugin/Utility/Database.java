@@ -13,7 +13,6 @@ public class Database {
     private JavaPlugin Plugin;
 
     public Database(JavaPlugin plugin, String databaseName) {
-        // Todo : pull database filepath from config
         this.Plugin = plugin;
         dbPath = Plugin.getDataFolder() + File.separator + databaseName;
         connect();

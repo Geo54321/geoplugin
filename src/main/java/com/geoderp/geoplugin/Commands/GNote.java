@@ -23,23 +23,34 @@ public class GNote implements CommandExecutor{
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(args.length > 0) {
-            if(args.length > 1) {
-                if(args[0].equals("remove")) {
-                    removeNote(sender, args[1]);
-                } else {
-                    addNote(sender, args);
-                }
-            }
-            else {
-                if(args[0].equals("recent")) {
-                    viewRecent(sender);
+        if (sender.hasPermission("GeoPlugin.commands.gnote")) {
+            if(args.length > 0) {
+                if(args.length > 1) {
+                    if(args[0].equals("remove")) {
+                        if (sender.hasPermission("GeoPlugin.notes.removeNote")) {
+                            removeNote(sender, args[1]);
+                        }
+                        else {
+                            sender.sendMessage("§cSorry but you do not have permission to remove notes.");
+                        }
+                    } 
+                    else {
+                        addNote(sender, args);
+                    }
                 }
                 else {
-                    viewNotes(sender, args[0]);
+                    if(args[0].equals("recent")) {
+                        viewRecent(sender);
+                    }
+                    else {
+                        viewNotes(sender, args[0]);
+                    }
                 }
+                return true;
             }
-            return true;
+        }
+        else {
+            sender.sendMessage("§cSorry but you do not have permission to use /gnote.");
         }
         return false;
     }
