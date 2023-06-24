@@ -1,0 +1,37 @@
+main: com.geoderp.geoplugin.Main
+name: GeoPlugin
+version: 2.1.1
+author: GeoDerp
+description: Add player notes, XP storage, and more!
+prefix: BlameGeo!
+commands:
+  gnote:
+    description: Used for adding, viewing and removing player notes
+    permissions: GeoPlugin.commands.gnote
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /gnote [playername] or /gnote [playerName] [note] or /gnote [recent] or /gnote [remove] [noteID]"
+permissions:
+  GeoPlugin.notes.loginNote:
+    description: Allow viewing login note
+    default: op
+  GeoPlugin.notes.removeNote:
+    description: Allows removing notes
+    default: op
+  GeoPlugin.notes.moderator:
+    description: Collection of permissions for moderator
+    default: op
+    children:
+      GeoPlugin.commands.gnote: true
+      GeoPlugin.notes.loginNote: true
+  GeoPlugin.notes.*:
+    description: Allows all parts of the notes modules
+    default: op
+    children: 
+      GeoPlugin.notes.moderator: true
+      GeoPlugin.notes.removeNote: true
+  GeoPlugin.*:
+    description: Wildcard permission
+    default: op
+    children:
+      GeoPlugin.notes.*: true
+  
