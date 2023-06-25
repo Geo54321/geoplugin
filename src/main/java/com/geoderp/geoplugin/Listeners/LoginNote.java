@@ -29,7 +29,7 @@ public class LoginNote implements Listener {
             }
 
             for (Player player : Bukkit.getOnlinePlayers()) {
-                if (player.hasPermission("GeoXP.notes.loginNote")) {
+                if (player.hasPermission("GeoPlugin.notes.loginNote")) {
                     messagePlayer(player, loggedPlayer.getName(), note, creator);
                 }
             }
@@ -37,7 +37,7 @@ public class LoginNote implements Listener {
         }
         else {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                if (player.hasPermission("GeoXP.notes.loginNote")) {
+                if (player.hasPermission("GeoPlugin.notes.loginNote")) {
                     player.sendMessage("§e"+loggedPlayer.getName()+" has no notes yet.");
                 }
             }
