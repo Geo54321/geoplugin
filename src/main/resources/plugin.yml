@@ -8,6 +8,8 @@ commands:
   gnote:
     description: Used for adding, viewing and removing player notes
     permissions: GeoPlugin.commands.gnote
+    aliases:
+      note
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /gnote [playername] or /gnote [playerName] [note] or /gnote [recent] or /gnote [remove] [noteID]"
 permissions:
