@@ -29,9 +29,7 @@ public class Main extends JavaPlugin {
         dbObj = new Database(this, "GeoDB.db");
         if(getConfig().getBoolean("modules.notes")) {
             this.getCommand("gnote").setExecutor(new GNote(dbObj));
-            if(getConfig().getBoolean("options.login-notes")) {
-                getServer().getPluginManager().registerEvents(new LoginNote(dbObj), this);
-            }
+            getServer().getPluginManager().registerEvents(new LoginNote(dbObj, this), this);
         }
         
     }

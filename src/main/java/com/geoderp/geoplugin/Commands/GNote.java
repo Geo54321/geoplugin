@@ -81,7 +81,7 @@ public class GNote implements CommandExecutor{
             senderuuid = p.getUniqueId().toString();
         }
         if (!targetuuid.equals("")) {
-            dbObj.insert("notes", senderuuid, dateString, targetuuid, note);
+            dbObj.insertNote(senderuuid, dateString, targetuuid, note);
             int noteID = dbObj.selectID("notes", "creator", senderuuid);
             message(sender,"§2Note #" + noteID + " for "+ args[0].trim().strip() +" successfully created!");
         }
@@ -89,7 +89,7 @@ public class GNote implements CommandExecutor{
 
     public void viewNotes(CommandSender sender, String player) {
         String uuid = getUUID(sender, player);
-        ArrayList<String[]> output = dbObj.selectAll("notes", "target", uuid);
+        ArrayList<String[]> output = dbObj.selectAllNotes("target", uuid);
 
         if(output.size() > 0) {
             message(sender,"§3===== "+player+"'s notes =====");
@@ -128,7 +128,7 @@ public class GNote implements CommandExecutor{
     }
 
     public void viewRecent(CommandSender sender) {
-        ArrayList<String[]> output = dbObj.selectRecent("notes");
+        ArrayList<String[]> output = dbObj.selectRecentNotes();
         message(sender,"§b===== 5 most recent notes =====");
         for(int g = output.size()-1; g >= 0; g--) {
             String creator = output.get(g)[1].trim().strip();

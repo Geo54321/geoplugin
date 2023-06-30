@@ -1,6 +1,6 @@
 main: com.geoderp.geoplugin.Main
 name: GeoPlugin
-version: 2.1.1
+version: 2.2.1
 author: GeoDerp
 description: Add player notes, XP storage, and more!
 prefix: BlameGeo!
@@ -12,6 +12,18 @@ commands:
       note
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /gnote [playername] or /gnote [playerName] [note] or /gnote [recent] or /gnote [remove] [noteID]"
+  geoplugin:
+    description: Used for plugin level control
+    permissions: GeoPlugin.commands.geoplugin
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /geoplugin reload"
+  geokeeper:
+    description: Used for storing and retreiving xp
+    permissions: GeoPlugin.commands.geokeeper
+    aliases:
+      [geoxp, gxp, gkeeper]
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage /geokeeper store [all/# of levels] or /geokeeper retreive [all/# of levels]"
 permissions:
   GeoPlugin.notes.loginNote:
     description: Allow viewing login note
@@ -25,15 +37,35 @@ permissions:
     children:
       GeoPlugin.commands.gnote: true
       GeoPlugin.notes.loginNote: true
+  GeoPlugin.geoplugin.reload:
+    description: Reloads the config file
+    default: op
+  GeoPlugin.geokeeper.others:
+    description: Allows usage of other players geokeepers
+    default: op
   GeoPlugin.notes.*:
-    description: Allows all parts of the notes modules
+    description: Allows all parts of the notes module
     default: op
     children: 
       GeoPlugin.notes.moderator: true
       GeoPlugin.notes.removeNote: true
+  GeoPlugin.geoplugin.*:
+    description: Allows all of the geoplugin command
+    default: op
+    children:
+      GeoPlugin.commands.geoplugin: true
+      GeoPlugin.geoplugin.reload: true
+  GeoPlugin.geokeeper.*:
+    description: Allows all parts of the xp module
+    default: op
+    children:
+      GeoPlugin.commands.geokeeper: true
+      GeoPlugin.geokeeper.others: true
   GeoPlugin.*:
     description: Wildcard permission
     default: op
     children:
       GeoPlugin.notes.*: true
+      GeoPlugin.geoplugin.*: true
+      GeoPlugin.geokeeper.*: true
   
