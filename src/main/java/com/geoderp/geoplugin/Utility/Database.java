@@ -17,6 +17,7 @@ public class Database {
         dbPath = Plugin.getDataFolder() + File.separator + databaseName;
         connect();
         createNoteTable();
+        createXPTable();
     }
 
     public void connect() {
