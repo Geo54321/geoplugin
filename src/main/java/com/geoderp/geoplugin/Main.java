@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.geoderp.geoplugin.Commands.GNote;
 import com.geoderp.geoplugin.Commands.GeoKeeper;
 import com.geoderp.geoplugin.Commands.GeoPlugin;
+import com.geoderp.geoplugin.Listeners.DeathXP;
 import com.geoderp.geoplugin.Listeners.LoginNote;
 import com.geoderp.geoplugin.Utility.Database;
 
@@ -35,6 +36,7 @@ public class Main extends JavaPlugin {
         }
         if(getConfig().getBoolean("modules.xp-storage")) {
             this.getCommand("geokeeper").setExecutor(new GeoKeeper(dbObj));
+            getServer().getPluginManager().registerEvents(new DeathXP(dbObj, this), this);
         }
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
         
@@ -54,6 +56,7 @@ public class Main extends JavaPlugin {
         config.addDefault("modules.xp-storage", true);
         config.addDefault("options.login-notes",true);
         config.addDefault("options.xp-store-on-death", true);
+        config.addDefault("options.xp-death-percent-high",1);
         config.addDefault("options.xp-death-percent-medium",0.50);
         config.addDefault("options.xp-death-percent-low",0.25);
 

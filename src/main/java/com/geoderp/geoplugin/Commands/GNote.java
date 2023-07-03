@@ -27,7 +27,7 @@ public class GNote implements CommandExecutor{
             if(args.length > 0) {
                 if(args.length > 1) {
                     if(args[0].equals("remove")) {
-                        if (sender.hasPermission("GeoPlugin.notes.removeNote")) {
+                        if (sender.hasPermission("GeoPlugin.commands.gnote.remove")) {
                             removeNote(sender, args[1]);
                         }
                         else {

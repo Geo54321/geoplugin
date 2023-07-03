@@ -25,11 +25,11 @@ commands:
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage /geokeeper store [all/# of levels] or /geokeeper retreive [all/# of levels]"
 permissions:
+  GeoPlugin.commands.gnote.remove:
+    description: Allows removing notes
+    default: op
   GeoPlugin.notes.loginNote:
     description: Allow viewing login note
-    default: op
-  GeoPlugin.notes.removeNote:
-    description: Allows removing notes
     default: op
   GeoPlugin.notes.moderator:
     description: Collection of permissions for moderator
@@ -37,30 +37,40 @@ permissions:
     children:
       GeoPlugin.commands.gnote: true
       GeoPlugin.notes.loginNote: true
-  GeoPlugin.geoplugin.reload:
+  GeoPlugin.commands.geoplugin.reload:
     description: Reloads the config file
     default: op
-  GeoPlugin.geokeeper.others:
+  GeoPlugin.commands.geokeeper.others:
     description: Allows usage of other players geokeepers
+    default: op
+  GeoPlugin.geokeeper.death.high:
+    description: Allows partial/full storage of XP on death
+    default: op
+  GeoPlugin.geokeeper.death.medium:
+    description: Allows partial storage of XP on death
+    default: op
+  GeoPlugin.geokeeper.death.low:
+    description: Allows small partial storage of XP on death
     default: op
   GeoPlugin.notes.*:
     description: Allows all parts of the notes module
     default: op
     children: 
       GeoPlugin.notes.moderator: true
-      GeoPlugin.notes.removeNote: true
+      GeoPlugin.commands.gnote.remove: true
   GeoPlugin.geoplugin.*:
     description: Allows all of the geoplugin command
     default: op
     children:
       GeoPlugin.commands.geoplugin: true
-      GeoPlugin.geoplugin.reload: true
+      GeoPlugin.commands.geoplugin.reload: true
   GeoPlugin.geokeeper.*:
     description: Allows all parts of the xp module
     default: op
     children:
       GeoPlugin.commands.geokeeper: true
-      GeoPlugin.geokeeper.others: true
+      GeoPlugin.commands.geokeeper.others: true
+      GeoPlugin.geokeeper.death.high: true
   GeoPlugin.*:
     description: Wildcard permission
     default: op
