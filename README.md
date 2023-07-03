@@ -68,7 +68,7 @@ WIP Coming Soon
 ### Grave Chests
 WIP Coming Soon
 
-### All Permission As Tree
+### All Permission Nodes as a Tree
 
 - GeoPlugin.*
     - GeoPlugin.notes.*
