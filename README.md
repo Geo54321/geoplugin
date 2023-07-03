@@ -70,18 +70,18 @@ WIP Coming Soon
 
 ### All Permission As Tree
 
-GeoPlugin.*
-    GeoPlugin.notes.*
-        GeoPlugin.notes.moderator
-            GeoPlugin.commands.gnote -- Allows use of /gnote
-            GeoPlugin.notes.loginNote -- Allows view of play login note
-        GeoPlugin.commands.gnote.remove -- Allows removal of notes with /gnote
-    GeoPlugin.geokeeper.*
-        GeoPlugin.commands.geokeeper -- Allows use of /geokeeper
-        GeoPlugin.commands.geokeeper.other -- Allows use of /geokeeper on other players
-        GeoPlugin.geokeeper.death.high -- Stored high amount of XP on death
-        GeoPlugin.geokeeper.death.medium -- Stored medium amount of XP on death
-        GeoPlugin.geokeeper.death.low -- Stored low amount of XP on death
-    GeoPlugin.geoplugin.*
-        GeoPlugin.commands.geoplugin - Allows use of /geoplugin
-        GeoPlugin.commands.geoplugin.reload - Allows reload of config file
+- GeoPlugin.*
+    - GeoPlugin.notes.*
+        - GeoPlugin.notes.moderator
+            - GeoPlugin.commands.gnote -- Allows use of /gnote
+            - GeoPlugin.notes.loginNote -- Allows view of play login note
+        - GeoPlugin.commands.gnote.remove -- Allows removal of notes with /gnote
+    - GeoPlugin.geokeeper.*
+        - GeoPlugin.commands.geokeeper -- Allows use of /geokeeper
+        - GeoPlugin.commands.geokeeper.other -- Allows use of /geokeeper on other players
+        - GeoPlugin.geokeeper.death.high -- Stored high amount of XP on death
+        - GeoPlugin.geokeeper.death.medium -- Stored medium amount of XP on death
+        - GeoPlugin.geokeeper.death.low -- Stored low amount of XP on death
+    - GeoPlugin.geoplugin.*
+        - GeoPlugin.commands.geoplugin - Allows use of /geoplugin
+        - GeoPlugin.commands.geoplugin.reload - Allows reload of config file
