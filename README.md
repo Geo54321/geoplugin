@@ -10,7 +10,7 @@ All the content in this plugin is separated into different distinct modules. The
 ### Notes Module
 Notes are stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/GeoDB.db
 
-Aliases: /note
+**Aliases: /note**
 
 | Command | Permission Node | Description |
 |----|----|----|
@@ -23,9 +23,9 @@ Aliases: /note
 ### XP Storage Module
 Player XP is stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/GeoDB.db
 
-Aliases: /geoxp /gxp /gkeeper
+**Aliases: /geoxp /gxp /gkeeper**
 
-#### Player Commands
+#### Player Commands:
 | Command | Permission Node | Description |
 |----|----|----|
 | /geokeeper | GeoPlugin.commands.geokeeper | Displays the amount of XP you have stored |
@@ -37,7 +37,7 @@ Aliases: /geoxp /gxp /gkeeper
 |  | GeoPlugin.geokeeper.death.medium | Stores a modest amount of XP into storage on death (default: 50%) |
 |  | GeoPlugin.geokeeper.death.low | Stores a small amount of XP into storage on death (default: 25%) |
 
-#### Staff Commands
+#### Staff Commands:
 | Command | Permission Node | Description |
 |----|----|----|
 | /geokeeper [playerName] | GeoPlugin.commands.geokeeper.others | Displays current stored XP of a given player |
