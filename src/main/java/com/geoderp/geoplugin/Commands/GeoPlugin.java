@@ -32,13 +32,18 @@ public class GeoPlugin implements CommandExecutor {
             else if (args[0].equals("magnet") && plugin.getConfig().getBoolean("modules.mechanics")) {
                 if (sender.hasPermission("GeoPlugin.commands.geoplugin.magnet") && sender instanceof Player) {
                     Player player = (Player) sender;
-                    spawnMagnet(player);
+                    if (args[1].equals("strong") || args[1].equals("weak")) {
+                        spawnMagnet(player, args[1]);
+                    }
+                    else {
+                        sender.sendMessage("§cYou must specify the magnet strength.");
+                    }
                 }
                 else if (sender instanceof ConsoleCommandSender) {
                     sender.sendMessage("§cYou must be in game to use this command.");
                 }
                 else {
-                    sender.sendMessage("§cYou must be in game to use this command.");
+                    sender.sendMessage("§cYou do not have permission to create a magnet.");
                 }
             }
             return true;
@@ -54,8 +59,15 @@ public class GeoPlugin implements CommandExecutor {
         sender.sendMessage("§2Config file reloaded!");
     }
 
-    public void spawnMagnet(Player player) {
-        ItemStack magnet = new ItemStack(MagnetRequirements.validMaterials[0]);
+    public void spawnMagnet(Player player, String strength) {
+        ItemStack magnet;
+        if (strength.equals("strong")) {
+            magnet = new ItemStack(MagnetRequirements.validStrongMaterials[0]);
+        }
+        else {
+            magnet = new ItemStack(MagnetRequirements.validWeakMaterials[0]);
+        }
+        
         magnet.setAmount(1);
         magnet.getItemMeta().setDisplayName(MagnetRequirements.name);
         magnet.getItemMeta().setLore(MagnetRequirements.loreList);
