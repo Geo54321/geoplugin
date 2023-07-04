@@ -92,18 +92,19 @@ public class GNote implements CommandExecutor{
         ArrayList<String[]> output = dbObj.selectAllNotes("target", uuid);
 
         if(output.size() > 0) {
-            message(sender,"§3===== "+player+"'s notes =====");
+            String actualUsername = Bukkit.getOfflinePlayer(player).getName();
+            message(sender,"§3===== "+actualUsername+"'s notes =====");
+            message(sender, "§3First Joined On: §7" + dbObj.getJoined(uuid));
+
             for(int g = 0; g < output.size(); g++) {
                 String creator = output.get(g)[1];
                 if (!creator.equals("CONSOLE")) {
                     creator = Bukkit.getOfflinePlayer(UUID.fromString(creator)).getName();
                 }
 
-                message(sender, "§3Note ID: §7" + output.get(g)[0]);
-                message(sender, "§3Author: §7" + creator);
-                message(sender, "§3Date: §7" + output.get(g)[2]);
+                message(sender, " §3--- Note ID: §7" + output.get(g)[0] + " §3---");
+                message(sender, "§3Author: §7" + creator + "  §3Date: §7" + output.get(g)[2]);
                 message(sender, "§3Note: §f" + output.get(g)[4]);
-                message(sender, "");
             }
         }
         else {
@@ -138,12 +139,9 @@ public class GNote implements CommandExecutor{
             String target = output.get(g)[3].trim().strip();
             target = Bukkit.getOfflinePlayer(UUID.fromString(target)).getName();
 
-            message(sender, "§bNote ID: §7" + output.get(g)[0]);
-            message(sender, "§bPlayer: §7" + target);
-            message(sender, "§bAuthor: §7" + creator);
-            message(sender, "§bDate: §7" + output.get(g)[2]);
+            message(sender, " §b--- Note ID: §7" + output.get(g)[0] + "§b ---");
+            message(sender, "§bPlayer: §7" + target + "  §bAuthor: §7" + creator + "  §bDate: §7" + output.get(g)[2]);
             message(sender, "§bNote: §f" + output.get(g)[4]);
-            message(sender,"");
         }
     }
 

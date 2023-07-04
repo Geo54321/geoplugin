@@ -9,7 +9,7 @@ commands:
     description: Used for adding, viewing and removing player notes
     permissions: GeoPlugin.commands.gnote
     aliases:
-      note
+      [note, notes, gnotes]
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /gnote [playername] or /gnote [playerName] [note] or /gnote [recent] or /gnote [remove] [noteID]"
   geoplugin:
@@ -37,9 +37,6 @@ permissions:
     children:
       GeoPlugin.commands.gnote: true
       GeoPlugin.notes.loginNote: true
-  GeoPlugin.commands.geoplugin.reload:
-    description: Reloads the config file
-    default: op
   GeoPlugin.commands.geokeeper.others:
     description: Allows usage of other players geokeepers
     default: op
@@ -52,18 +49,24 @@ permissions:
   GeoPlugin.geokeeper.death.low:
     description: Allows small partial storage of XP on death
     default: op
+  GeoPlugin.commands.geoplugin.magnet:
+    description: Reloads the config file
+    default: op
+  GeoPlugin.commands.geoplugin.reload:
+    description: Reloads the config file
+    default: op
+  GeoPlugin.mechanics.magnet:
+    description: Allows usage of magnets
+    default: op
+  GeoPlugin.mechanics.harvest:
+    description: Allows usage of right click harvest
+    default: op
   GeoPlugin.notes.*:
     description: Allows all parts of the notes module
     default: op
     children: 
       GeoPlugin.notes.moderator: true
       GeoPlugin.commands.gnote.remove: true
-  GeoPlugin.geoplugin.*:
-    description: Allows all of the geoplugin command
-    default: op
-    children:
-      GeoPlugin.commands.geoplugin: true
-      GeoPlugin.commands.geoplugin.reload: true
   GeoPlugin.geokeeper.*:
     description: Allows all parts of the xp module
     default: op
@@ -71,11 +74,25 @@ permissions:
       GeoPlugin.commands.geokeeper: true
       GeoPlugin.commands.geokeeper.others: true
       GeoPlugin.geokeeper.death.high: true
+  GeoPlugin.mechanics.*:
+    description: Allows use of all parts of the mechanics module
+    default: op
+    children:
+      GeoPlugin.mechanics.magnet: true
+      GeoPlugin.mechanics.harvest: true
+  GeoPlugin.geoplugin.*:
+    description: Allows all of the geoplugin command
+    default: op
+    children:
+      GeoPlugin.commands.geoplugin: true
+      GeoPlugin.commands.geoplugin.reload: true
+      GeoPlugin.commands.geoplugin.magnet: true
   GeoPlugin.*:
     description: Wildcard permission
     default: op
     children:
       GeoPlugin.notes.*: true
-      GeoPlugin.geoplugin.*: true
       GeoPlugin.geokeeper.*: true
+      GeoPlugin.mechanics.*: true
+      GeoPlugin.geoplugin.*: true
   

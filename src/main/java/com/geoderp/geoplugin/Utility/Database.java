@@ -18,6 +18,7 @@ public class Database {
         connect();
         createNoteTable();
         createXPTable();
+        createJoinDateTable();
     }
 
     public void connect() {
@@ -263,5 +264,53 @@ public class Database {
         catch (Exception e) {
             Plugin.getLogger().log(Level.INFO, "Error updating amount in " + dbPath + " database: " + e);
         }
+    }
+
+    public void createJoinDateTable() {
+        try {
+            Statement stmt = db.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS joined(id integer PRIMARY KEY, player text, date text);";
+            stmt.executeUpdate(sql);
+            stmt.close();
+        }
+        catch (Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error creating join date table in " + dbPath + " database: " + e);
+        }
+    }
+
+    public void addJoined(String player, String date) {
+        String sql = "INSERT INTO joined(player, date) VALUES(?,?)";
+
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            stmt.setString(1, player);
+            stmt.setString(2, date);
+            stmt.executeUpdate();
+            stmt.close();
+        }
+        catch (Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error inserting into " + dbPath + " database: " + e);
+        }
+    }
+
+    public String getJoined(String player) {
+        String sql = "SELECT date FROM joined WHERE player = ?";
+        String joined = null;
+
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            stmt.setString(1, player);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                joined = rs.getString("date");
+            }
+            return joined;
+        }
+        catch (Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error selecting date from " + dbPath + " database: " + e);
+        }
+
+        return joined;
     }
 }

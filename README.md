@@ -47,28 +47,32 @@ Player XP is stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/
 | /geokeeper retrieve [# of levels] [playerName] | GeoPlugin.commands.geokeeper.others | Retrieves a given number of levels of a given player to you |
 
 
-### Right Click Harvest/Bonemeal Lilypads
-WIP Coming Soon
-This is already created, just need to move it from my old plugin.
+### Right Click Harvest
+Allows right click harvesting and auto-replanting of the crops listed below.
 
-### Wither Rose/Netherstar "Magnet"
+#### Supported Crops:
+- Wheat
+- Potatoes
+- Carrots
+- Beetroot
+- Nether Wart
+
+### Magnet
+Turns a nether star or wither rose in your offhand into a magnet. The magnet move all items and xp within a configurable range to to you.
+
+#### Command
+| Command | Permission Node | Description |
+|----|----|----|
+| /geoplugin magnet | GeoPlugin.commands.geoplugin.magnet | Spawns a valid magnet item |
+
+### Bonemeal Non-standard Plants
 WIP Coming Soon
-This is already created, just need to move it from my old plugin.
 
 ### Vampirism
 WIP Coming Soon
 This is already created, just need to move it from my old plugin.
 
-### Old Username Lookup
-WIP Coming Soon
-
-### Step Assist
-WIP Coming Soon
-
-### Grave Chests
-WIP Coming Soon
-
-### All Permission Nodes as a Tree
+## All Permission Nodes as a Tree
 
 - GeoPlugin.*
     - GeoPlugin.notes.*
@@ -82,6 +86,10 @@ WIP Coming Soon
         - GeoPlugin.geokeeper.death.high -- Stored high amount of XP on death
         - GeoPlugin.geokeeper.death.medium -- Stored medium amount of XP on death
         - GeoPlugin.geokeeper.death.low -- Stored low amount of XP on death
+    - GeoPlugin.mechanics.*
+        - GeoPlugin.mechanics.magnet -- Allows usage of the magnets
+        - GeoPlugin.mechanics.harvest -- Allows usage of the right click harvest
     - GeoPlugin.geoplugin.*
         - GeoPlugin.commands.geoplugin - Allows use of /geoplugin
         - GeoPlugin.commands.geoplugin.reload - Allows reload of config file
+        - GeoPlugin.commands.geoplugin.magnet - Allows spawning of magnet item

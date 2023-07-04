@@ -54,11 +54,13 @@ public class Main extends JavaPlugin {
 
         config.addDefault("modules.notes",true);
         config.addDefault("modules.xp-storage", true);
+        config.addDefault("modules.mechanics", true);
         config.addDefault("options.login-notes",true);
         config.addDefault("options.xp-store-on-death", true);
         config.addDefault("options.xp-death-percent-high",1);
         config.addDefault("options.xp-death-percent-medium",0.50);
         config.addDefault("options.xp-death-percent-low",0.25);
+        config.addDefault("options.magnet-range",5);
 
         config.options().copyDefaults(true);
         saveConfig();

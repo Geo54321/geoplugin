@@ -2,7 +2,6 @@ package com.geoderp.geoplugin.Commands;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -42,11 +41,11 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                     else if (args.length == 2) {
                         // store or retrive self
                         if (args[0].equals("retrieve")) {
-                            retrieveXP(player, args);
+                            retrieveXP(sender, player, args);
                             sender.sendMessage("§aYou currently have " + getStoredXP(player) + " XP points stored.");
                         }
                         else if (args[0].equals("store")) {
-                            storeXP(player, args);
+                            storeXP(sender, player, args);
                             sender.sendMessage("§aYou currently have " + getStoredXP(player) + " XP points stored.");
                         }
                         else {
@@ -59,11 +58,11 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                             player = Bukkit.getPlayer(args[2]);
                             if (player != null) {
                                 if (args[0].equals("retrieve")) {
-                                    retrieveXP(player, args);
+                                    retrieveXP(sender, player, args);
                                     sender.sendMessage("§a" + player.getName() + " currently have " + getStoredXP(player) + " XP points stored.");
                                 }
                                 else if (args[0].equals("store")) {
-                                    storeXP(player, args);
+                                    storeXP(sender, player, args);
                                     sender.sendMessage("§a" + player.getName() + "You currently have " + getStoredXP(player) + " XP points stored.");
                                 }
                                 else {
@@ -102,11 +101,11 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                     Player player = Bukkit.getPlayer(args[2]);
                     if (player != null) {
                         if (args[0].equals("retrieve")) {
-                            retrieveXP(player, args);
+                            retrieveXP(sender, player, args);
                             sender.sendMessage("§a" + player.getName() + " currently have " + getStoredXP(player) + " XP points stored.");
                         }
                         else if (args[0].equals("store")) {
-                            storeXP(player, args);
+                            storeXP(sender, player, args);
                             sender.sendMessage("§a" + player.getName() + "You currently have " + getStoredXP(player) + " XP points stored.");
                         }
                         else {
@@ -131,14 +130,35 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        List<String> subCommands = Arrays.asList("store", "retrieve");
-        List<String> emptyList = Arrays.asList("");
-        if(args.length > 1)
-            return Collections.emptyList();
-        else if(args.length > 0)
-            return StringUtil.copyPartialMatches(args[0], subCommands, emptyList);
-        else
+        ArrayList<String> players = new ArrayList<String>();
+        ArrayList<String> subCommands = new ArrayList<String>();
+        if (sender.hasPermission("GeoPlugin.commands.geokeeper.other")) {
+            for(Player player : Bukkit.getOnlinePlayers()) {
+                players.add(player.getName().toString());
+                subCommands.add(player.getName().toString());
+            }
+        }
+        
+        subCommands.add("store");
+        subCommands.add("retrieve");
+        List<String> values = Arrays.asList("all", "[<levelCount>]");
+        List<String> completions = new ArrayList<String>();
+
+        if (args.length == 1) {
+            StringUtil.copyPartialMatches(args[0], subCommands, completions);
+            return completions;
+        }
+        else if (args.length == 2) {
+            StringUtil.copyPartialMatches(args[1], values, completions);
+            return completions;
+        }
+        else if (args.length == 3 && sender.hasPermission("GeoPlugin.commands.geokeeper.other")) {
+            StringUtil.copyPartialMatches(args[2], players, completions);
+            return completions;
+        }
+        else {
             return null;
+        }
     }
 
     public boolean validPlayer(Player player) {
@@ -165,21 +185,21 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
         return dbObj.getXP(uuid);
     }
 
-    public void storeXP(Player player, String[] args) {
+    public void storeXP(CommandSender sender, Player player, String[] args) {
         if (!validPlayer(player)) {
             addUser(player, 0);
         }
 
         if (args[1].equals("all")) {
-            storeAllLevel(player);
+            storeAllLevel(sender, player);
         }
         else {
-            storeSomeLevels(player, args[1]);
+            storeSomeLevels(sender, player, args[1]);
         }
         
     }
 
-    public void storeAllLevel(Player player) {
+    public void storeAllLevel(CommandSender sender, Player player) {
         int stored = getStoredXP(player);
         int current = XP.getXPOfLevel(player.getLevel());
         current += player.getExp() * (XP.getXPOfLevel(player.getLevel()+1) - XP.getXPOfLevel(player.getLevel()));
@@ -187,12 +207,16 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
         dbObj.updateXP(stored+current, player.getUniqueId().toString());
         XP.setPlayerXP(player, 0);
 
-        player.sendMessage("§2Successfully stored all stored levels!");
+        sender.sendMessage("§2Successfully stored all stored levels!");
     }
 
-    public void storeSomeLevels(Player player, String levelArg) {
+    public void storeSomeLevels(CommandSender sender, Player player, String levelArg) {
         try {
             int levelToStore = Integer.parseInt(levelArg);
+            if (levelToStore <= 0) {
+                sender.sendMessage("§cYou cannot use negative levels. Nice Try.");
+                return;
+            }
             int xpToStore = XP.getXPOfLevel(player.getLevel()) - XP.getXPOfLevel(player.getLevel()-levelToStore);
             int stored = getStoredXP(player);
             int current = XP.getXPOfLevel(player.getLevel());
@@ -202,36 +226,36 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                 dbObj.updateXP(stored+current, player.getUniqueId().toString());
                 XP.setPlayerXP(player, 0);
 
-                player.sendMessage("§6You do not have " + levelToStore + " levels to store. Storing all XP.");
+                sender.sendMessage("§6You do not have " + levelToStore + " levels to store. Storing all XP.");
             }
             else {
                 dbObj.updateXP(stored+xpToStore, player.getUniqueId().toString());
                 XP.setPlayerXP(player, current-xpToStore);
 
-                player.sendMessage("§2Successfully stored "+ levelToStore +" levels!");
+                sender.sendMessage("§2Successfully stored "+ levelToStore +" levels!");
             }
 
             
         }
         catch (Exception e) {
-            player.sendMessage("§cIncorrect parameter, either use 'all' or an integer number of levels.");
+            sender.sendMessage("§cIncorrect parameter, either use 'all' or an integer number of levels.");
         }
     }
 
-    public void retrieveXP(Player player, String[] args) {
+    public void retrieveXP(CommandSender sender, Player player, String[] args) {
         if (!validPlayer(player)) {
             addUser(player, 0);
         }
         
         if (args[1].equals("all")) {
-            retrieveAllLevels(player);
+            retrieveAllLevels(sender, player);
         }
         else {
-            retrieveSomeLevels(player, args[1]);
+            retrieveSomeLevels(sender, player, args[1]);
         }
     }
 
-    public void retrieveAllLevels(Player player) {
+    public void retrieveAllLevels(CommandSender sender, Player player) {
         int stored = getStoredXP(player);
         int current = XP.getXPOfLevel(player.getLevel());
         current += player.getExp() * (XP.getXPOfLevel(player.getLevel()+1) - XP.getXPOfLevel(player.getLevel()));
@@ -239,12 +263,16 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
         XP.setPlayerXP(player, current+stored);
         dbObj.updateXP(0, player.getUniqueId().toString());
         
-        player.sendMessage("§2Successfully retrieved all stored levels!");
+        sender.sendMessage("§2Successfully retrieved all stored levels!");
     }
 
-    public void retrieveSomeLevels(Player player, String levelArg) {
+    public void retrieveSomeLevels(CommandSender sender, Player player, String levelArg) {
         try {
             int levelToPull = Integer.parseInt(levelArg);
+            if (levelToPull <= 0) {
+                sender.sendMessage("§cYou cannot use negative levels. Nice Try.");
+                return;
+            }
             int xpToPull = XP.getXPOfLevel(player.getLevel()+levelToPull) - XP.getXPOfLevel(player.getLevel());
             int stored = getStoredXP(player);
             int current = XP.getXPOfLevel(player.getLevel());
@@ -254,17 +282,17 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                 XP.setPlayerXP(player, current+stored);
                 dbObj.updateXP(0, player.getUniqueId().toString());
 
-                player.sendMessage("§6You did not have enough XP stored to retrieve "+ levelToPull +" levels. Retrieved all stored XP.");
+                sender.sendMessage("§6You did not have enough XP stored to retrieve "+ levelToPull +" levels. Retrieved all stored XP.");
             }
             else {
                 XP.setPlayerXP(player, current+xpToPull);
                 dbObj.updateXP(stored-xpToPull, player.getUniqueId().toString());
 
-                player.sendMessage("§2Successfully retrieved "+ levelToPull +" levels!");
+                sender.sendMessage("§2Successfully retrieved "+ levelToPull +" levels!");
             }
         }
         catch (Exception e) {
-            player.sendMessage("§cIncorrect parameter, either use 'all' or an integer number of levels.");
+            sender.sendMessage("§cIncorrect parameter, either use 'all' or an integer number of levels.");
         }
     }
 }
