@@ -50,13 +50,16 @@ permissions:
     description: Allows small partial storage of XP on death
     default: op
   GeoPlugin.commands.geoplugin.magnet:
-    description: Reloads the config file
+    description: Allows use /geoplugin to spawn a magnet
     default: op
   GeoPlugin.commands.geoplugin.reload:
     description: Reloads the config file
     default: op
-  GeoPlugin.mechanics.magnet:
-    description: Allows usage of magnets
+  GeoPlugin.mechanics.magnet.strong:
+    description: Allows usage of strong magnets
+    default: op
+  GeoPlugin.mechanics.magnet.weak:
+    description: Allows usage of weak magnets
     default: op
   GeoPlugin.mechanics.harvest:
     description: Allows usage of right click harvest
@@ -78,7 +81,8 @@ permissions:
     description: Allows use of all parts of the mechanics module
     default: op
     children:
-      GeoPlugin.mechanics.magnet: true
+      GeoPlugin.mechanics.magnet.strong: true
+      GeoPlugin.mechanics.magnet.weak: true
       GeoPlugin.mechanics.harvest: true
   GeoPlugin.geoplugin.*:
     description: Allows all of the geoplugin command
