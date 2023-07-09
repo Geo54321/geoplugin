@@ -1,13 +1,13 @@
 
 # Current Supported Minecraft Version: 1.20.1
 
-# GeoPlugin
+## GeoPlugin
 This is a Minecraft Spigot plugin that adds features we use on the MCNSA community server.
 
-## Modules
+# Modules
 All the content in this plugin is separated into different distinct modules. These modules can be disabled by finding the module you want to disable in the config file and setting it to false.
 
-### Notes Module
+## Notes Module
 Notes are stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/GeoDB.db
 
 **Aliases: /gnotes /note /notes**
@@ -20,12 +20,12 @@ Notes are stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/Geo
 | /gnote remove [noteID] | GeoPlugin.commands.gnote.remove | Remove the note with given ID from the database |
 |  | GeoPlugin.notes.loginNote | Displays the most recent note on players when they login |
 
-### XP Storage Module
+## XP Storage Module
 Player XP is stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/GeoDB.db
 
 **Aliases: /geoxp /gxp /gkeeper**
 
-#### Player Commands:
+### Player Commands:
 | Command | Permission Node | Description |
 |----|----|----|
 | /geokeeper | GeoPlugin.commands.geokeeper | Displays the amount of XP you have stored |
@@ -37,7 +37,7 @@ Player XP is stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/
 |  | GeoPlugin.geokeeper.death.medium | Stores a modest amount of XP into storage on death (default: 50%) |
 |  | GeoPlugin.geokeeper.death.low | Stores a small amount of XP into storage on death (default: 25%) |
 
-#### Staff Commands:
+### Staff Commands:
 | Command | Permission Node | Description |
 |----|----|----|
 | /geokeeper [playerName] | GeoPlugin.commands.geokeeper.others | Displays current stored XP of a given player |
@@ -46,18 +46,18 @@ Player XP is stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/
 | /geokeeper retrieve all [playerName] | GeoPlugin.commands.geokeeper.others | Retrieve all stored XP of a given player to you |
 | /geokeeper retrieve [# of levels] [playerName] | GeoPlugin.commands.geokeeper.others | Retrieves a given number of levels of a given player to you |
 
-### Magnet
+## Magnet
 Holding a valid magnet item in your offhand will pull items and xp orbs to you when you move. Sneaking will disable the magnet effect (this is configurable).
 
-#### Magnet Strengths:
+### Magnet Strengths:
 Weak: Default pickup range of 2 blocks
 Strong: Default pickup range of 4 blocks
 
-#### Valid Magnet Item Types:
+### Valid Magnet Item Types:
 Weak: Rabbit Foot, Heart of the Sea, Ghast Tear, Nautilus Shell
 Strong: Enchanted Golden Apple (Notch Apple), Nether Star, Netherite Ingot
 
-#### Command
+### Command
 | Command | Permission Node | Description |
 |----|----|----|
 | /geoplugin magnet | GeoPlugin.commands.geoplugin.magnet | Add magnet lore to main hand item |
@@ -65,17 +65,17 @@ Strong: Enchanted Golden Apple (Notch Apple), Nether Star, Netherite Ingot
 |  | GeoPlugin.mechanics.magnet.weak | Gives access to use the weak magnets |
 |  | GeoPlugin.mechanics.magnet.strong | Gives access to use the strong magnets |
 
-### Right Click Harvest
+## Right Click Harvest
 Allows right click harvesting and auto-replanting of the crops listed below.
 
-#### Supported Crops:
+### Supported Crops:
 - Wheat
 - Potatoes
 - Carrots
 - Beetroot
 - Nether Wart
 
-## All Permission Nodes as a Tree
+# All Permission Nodes as a Tree
 
 - GeoPlugin.*
     - GeoPlugin.notes.*
@@ -90,8 +90,10 @@ Allows right click harvesting and auto-replanting of the crops listed below.
         - GeoPlugin.geokeeper.death.medium -- Stored medium amount of XP on death
         - GeoPlugin.geokeeper.death.low -- Stored low amount of XP on death
     - GeoPlugin.mechanics.*
-        - GeoPlugin.mechanics.magnet -- Allows usage of the magnets
+        - GeoPlugin.mechanics.magnet.weak -- Allows usage of weak magnets
+        - GeoPlugin.mechanics.magnet.strong -- Allows usage of strong magnets
         - GeoPlugin.mechanics.harvest -- Allows usage of the right click harvest
+        - GeoPlugin.mechanics.mountTeleport -- Allows mounts to teleport with the player
     - GeoPlugin.geoplugin.*
         - GeoPlugin.commands.geoplugin - Allows use of /geoplugin
         - GeoPlugin.commands.geoplugin.reload - Allows reload of config file

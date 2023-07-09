@@ -65,6 +65,9 @@ permissions:
   GeoPlugin.mechanics.harvest:
     description: Allows usage of right click harvest
     default: op
+  GeoPlugin.mechanics.mountTeleport:
+    description: Allows usage of teleporting mounts
+    default: op
   GeoPlugin.notes.*:
     description: Allows all parts of the notes module
     default: op
@@ -85,6 +88,7 @@ permissions:
       GeoPlugin.mechanics.magnet.strong: true
       GeoPlugin.mechanics.magnet.weak: true
       GeoPlugin.mechanics.harvest: true
+      GeoPlugin.mechanics.mountTeleport: true
   GeoPlugin.geoplugin.*:
     description: Allows all of the geoplugin command
     default: op

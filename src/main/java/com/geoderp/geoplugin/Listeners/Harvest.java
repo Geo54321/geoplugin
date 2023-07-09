@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Iterator;
-import java.util.Random;
 
 public class Harvest implements Listener {
     private Material[] plants = {Material.WHEAT, Material.POTATOES, Material.CARROTS, Material.BEETROOTS, Material.NETHER_WART};
