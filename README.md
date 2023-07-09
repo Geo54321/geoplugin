@@ -10,7 +10,7 @@ All the content in this plugin is separated into different distinct modules. The
 ### Notes Module
 Notes are stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/GeoDB.db
 
-**Aliases: /note**
+**Aliases: /gnotes /note /notes**
 
 | Command | Permission Node | Description |
 |----|----|----|
@@ -46,6 +46,24 @@ Player XP is stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/
 | /geokeeper retrieve all [playerName] | GeoPlugin.commands.geokeeper.others | Retrieve all stored XP of a given player to you |
 | /geokeeper retrieve [# of levels] [playerName] | GeoPlugin.commands.geokeeper.others | Retrieves a given number of levels of a given player to you |
 
+### Magnet
+Holding a valid magnet item in your offhand will pull items and xp orbs to you when you move. Sneaking will disable the magnet effect (this is configurable).
+
+#### Magnet Strengths:
+Weak: Default pickup range of 2 blocks
+Strong: Default pickup range of 4 blocks
+
+#### Valid Magnet Item Types:
+Weak: Rabbit Foot, Heart of the Sea, Ghast Tear, Nautilus Shell
+Strong: Enchanted Golden Apple (Notch Apple), Nether Star, Netherite Ingot
+
+#### Command
+| Command | Permission Node | Description |
+|----|----|----|
+| /geoplugin magnet | GeoPlugin.commands.geoplugin.magnet | Add magnet lore to main hand item |
+| /geoplugin magnet [weak/strong] | GeoPlugin.commands.geoplugin.magnet | Spawns a magnet of given strength |
+|  | GeoPlugin.mechanics.magnet.weak | Gives access to use the weak magnets |
+|  | GeoPlugin.mechanics.magnet.strong | Gives access to use the strong magnets |
 
 ### Right Click Harvest
 Allows right click harvesting and auto-replanting of the crops listed below.
@@ -56,15 +74,6 @@ Allows right click harvesting and auto-replanting of the crops listed below.
 - Carrots
 - Beetroot
 - Nether Wart
-
-### Magnet
-Turns a nether star or wither rose in your offhand into a magnet. The magnet move all items and xp within a configurable range to to you.
-
-#### Command
-| Command | Permission Node | Description |
-|----|----|----|
-| /geoplugin magnet | GeoPlugin.commands.geoplugin.magnet | Spawns a valid magnet item |
-
 
 ## All Permission Nodes as a Tree
 
@@ -86,4 +95,4 @@ Turns a nether star or wither rose in your offhand into a magnet. The magnet mov
     - GeoPlugin.geoplugin.*
         - GeoPlugin.commands.geoplugin - Allows use of /geoplugin
         - GeoPlugin.commands.geoplugin.reload - Allows reload of config file
-        - GeoPlugin.commands.geoplugin.magnet - Allows spawning of magnet item
+        - GeoPlugin.commands.geoplugin.magnet - Allows usage of the magnet subcommand

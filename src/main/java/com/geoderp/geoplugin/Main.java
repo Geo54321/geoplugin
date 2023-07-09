@@ -70,8 +70,8 @@ public class Main extends JavaPlugin {
         config.addDefault("options.xp-death-percent-high",1);
         config.addDefault("options.xp-death-percent-medium",0.50);
         config.addDefault("options.xp-death-percent-low",0.25);
-        config.addDefault("options.strong-magnet-range",6);
-        config.addDefault("options.weak-magnet-range",3);
+        config.addDefault("options.strong-magnet-range",4);
+        config.addDefault("options.weak-magnet-range",2);
         config.addDefault("options.sneak-disable-magnet", true);
 
         config.options().copyDefaults(true);
