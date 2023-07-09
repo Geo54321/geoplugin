@@ -7,7 +7,10 @@ import com.geoderp.geoplugin.Commands.GNote;
 import com.geoderp.geoplugin.Commands.GeoKeeper;
 import com.geoderp.geoplugin.Commands.GeoPlugin;
 import com.geoderp.geoplugin.Listeners.DeathXP;
+import com.geoderp.geoplugin.Listeners.Harvest;
 import com.geoderp.geoplugin.Listeners.LoginNote;
+import com.geoderp.geoplugin.Listeners.Magnet;
+import com.geoderp.geoplugin.Listeners.Teleport;
 import com.geoderp.geoplugin.Utility.Database;
 
 import java.util.ArrayList;
@@ -38,7 +41,14 @@ public class Main extends JavaPlugin {
             this.getCommand("geokeeper").setExecutor(new GeoKeeper(dbObj));
             getServer().getPluginManager().registerEvents(new DeathXP(dbObj, this), this);
         }
+        if(getConfig().getBoolean("modules.mechanics")) {
+            getServer().getPluginManager().registerEvents(new Magnet(this), this);
+            getServer().getPluginManager().registerEvents(new Harvest(), this);
+        }
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
+
+        // FIX THIS LATER
+        getServer().getPluginManager().registerEvents(new Teleport(), this);
         
     }
     @Override
@@ -62,6 +72,7 @@ public class Main extends JavaPlugin {
         config.addDefault("options.xp-death-percent-low",0.25);
         config.addDefault("options.strong-magnet-range",6);
         config.addDefault("options.weak-magnet-range",3);
+        config.addDefault("options.sneak-disable-magnet", true);
 
         config.options().copyDefaults(true);
         saveConfig();

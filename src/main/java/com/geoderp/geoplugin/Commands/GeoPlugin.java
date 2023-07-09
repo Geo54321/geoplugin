@@ -7,6 +7,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.geoderp.geoplugin.Utility.MagnetRequirements;
@@ -32,11 +33,19 @@ public class GeoPlugin implements CommandExecutor {
             else if (args[0].equals("magnet") && plugin.getConfig().getBoolean("modules.mechanics")) {
                 if (sender.hasPermission("GeoPlugin.commands.geoplugin.magnet") && sender instanceof Player) {
                     Player player = (Player) sender;
-                    if (args[1].equals("strong") || args[1].equals("weak")) {
-                        spawnMagnet(player, args[1]);
+                    if (args.length == 1) {
+                        ItemStack item = player.getInventory().getItemInMainHand();
+                        if (item != null) {
+                            item = makeMagnet(item);
+                        }
                     }
-                    else {
-                        sender.sendMessage("§cYou must specify the magnet strength.");
+                    else if (args.length > 1) {
+                        if (args[1].equals("strong") || args[1].equals("weak")) {
+                            spawnMagnet(player, args[1]);
+                        }
+                        else {
+                            sender.sendMessage("§cYou must specify the magnet strength.");
+                        }
                     }
                 }
                 else if (sender instanceof ConsoleCommandSender) {
@@ -69,9 +78,21 @@ public class GeoPlugin implements CommandExecutor {
         }
         
         magnet.setAmount(1);
-        magnet.getItemMeta().setDisplayName(MagnetRequirements.name);
-        magnet.getItemMeta().setLore(MagnetRequirements.loreList);
-        magnet.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+
+        magnet = makeMagnet(magnet);
+        
         player.getInventory().addItem(magnet);
+    }
+
+    public ItemStack makeMagnet(ItemStack magnet) {
+        ItemMeta magnetMeta = magnet.getItemMeta();
+
+        magnetMeta.setDisplayName(MagnetRequirements.name);
+        magnetMeta.setLore(MagnetRequirements.lore);
+
+        magnet.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+        magnet.setItemMeta(magnetMeta);
+
+        return magnet;
     }
 }

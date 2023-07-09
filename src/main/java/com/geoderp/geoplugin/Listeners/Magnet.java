@@ -1,5 +1,6 @@
 package com.geoderp.geoplugin.Listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;
@@ -30,8 +31,19 @@ public class Magnet implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
+        if (plugin.getConfig().getBoolean("options.sneak-disable-magnet") && player.isSneaking()) {
+            // Don't do magnet
+        }
+        else {
+            if (Math.abs(event.getFrom().distance(event.getTo())) > 0) {
+                doMagnet(player);
+            }   
+        }
+    }
+
+    public void doMagnet(Player player) {
         if (player.hasPermission("GeoPlugin.mechanics.magnet.strong") && isValidMagnet(player).equals("strong")){
-            for(Entity entity : player.getNearbyEntities(strongRange, strongRange, strongRange)) {
+            for(Entity entity : player.getNearbyEntities(strongRange, strongRange/2, strongRange)) {
                 if(entity instanceof Item || entity instanceof ExperienceOrb) {
                     entity.teleport(player);
                 }
@@ -47,22 +59,32 @@ public class Magnet implements Listener {
     }
 
     public String isValidMagnet(Player player) {
-        ItemStack offhandItem = player.getInventory().getItemInOffHand();
-        ItemMeta offhandMeta = offhandItem.getItemMeta();
-        Material offhandMaterial = offhandItem.getType();
-
-        if (offhandMeta.isUnbreakable() && offhandMeta.hasLore() && offhandMeta.getLore().contains(MagnetRequirements.lore)) {
-            for (Material mat : validStrongMaterials) {
-                if (mat.equals(offhandMaterial)) {
-                    return "strong";
+        try {
+            ItemStack offhandItem = player.getInventory().getItemInOffHand();
+            if (offhandItem != null && offhandItem.getItemMeta() != null) {
+                ItemMeta offhandMeta = offhandItem.getItemMeta();
+                Material offhandMaterial = offhandItem.getType();
+                
+                if (offhandMeta.hasLore()) {
+                    if (offhandMeta.getLore().equals(MagnetRequirements.lore)) {
+                        for (Material mat : validStrongMaterials) {
+                            if (mat.equals(offhandMaterial)) {
+                                return "strong";
+                            }
+                        }
+                        for (Material mat : validWeakMaterials) {
+                            if (mat.equals(offhandMaterial)) {
+                                return "weak";
+                            }
+                        }
+                    }
                 }
             }
-            for (Material mat : validWeakMaterials) {
-                if (mat.equals(offhandMaterial)) {
-                    return "weak";
-                }
-            }
+            return "null";
         }
-        return null;
+        catch (Exception e) {
+            Bukkit.getLogger().info(player.getName() + "'s magnet is angy" + e);
+        }
+        return "null";
     }
 }
