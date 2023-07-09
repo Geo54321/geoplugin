@@ -91,11 +91,10 @@ public class GNote implements CommandExecutor{
         String uuid = getUUID(sender, player);
         ArrayList<String[]> output = dbObj.selectAllNotes("target", uuid);
 
+        String actualUsername = Bukkit.getOfflinePlayer(player).getName();
+        message(sender,"§3===== "+actualUsername+"'s notes =====");
+        message(sender, "§3First Joined Date: §7" + dbObj.getJoined(uuid));
         if(output.size() > 0) {
-            String actualUsername = Bukkit.getOfflinePlayer(player).getName();
-            message(sender,"§3===== "+actualUsername+"'s notes =====");
-            message(sender, "§3First Joined On: §7" + dbObj.getJoined(uuid));
-
             for(int g = 0; g < output.size(); g++) {
                 String creator = output.get(g)[1];
                 if (!creator.equals("CONSOLE")) {
@@ -108,7 +107,7 @@ public class GNote implements CommandExecutor{
             }
         }
         else {
-            message(sender, "§6"+player+" does not have any notes yet.");
+            message(sender, "§6--- "+actualUsername+" has no notes yet ---");
         }
     }
 

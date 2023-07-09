@@ -65,12 +65,6 @@ Turns a nether star or wither rose in your offhand into a magnet. The magnet mov
 |----|----|----|
 | /geoplugin magnet | GeoPlugin.commands.geoplugin.magnet | Spawns a valid magnet item |
 
-### Bonemeal Non-standard Plants
-WIP Coming Soon
-
-### Vampirism
-WIP Coming Soon
-This is already created, just need to move it from my old plugin.
 
 ## All Permission Nodes as a Tree
 
