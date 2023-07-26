@@ -267,7 +267,7 @@ public class Database {
     }
 
     public ArrayList<String[]> getAllXP() {
-        String sql = "SELECT player, amount FROM xp ORDER BY amount LIMIT 10";
+        String sql = "SELECT player, amount FROM xp ORDER BY amount DESC LIMIT 10";
         ArrayList<String[]> all = new ArrayList<String[]>();
 
         try {
