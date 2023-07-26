@@ -67,7 +67,7 @@ public class Main extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new Teleport(), this);
             this.getCommand("explode").setExecutor(new Explode());
         }
-        if (getConfig().getBoolean("modules-enchantments")) {
+        if (getConfig().getBoolean("modules.enchantments")) {
             GeoEnchants.registerAll();
             getServer().getPluginManager().registerEvents(new Hewing(this), this);
             this.getCommand("please").setExecutor(new Please());
@@ -90,7 +90,7 @@ public class Main extends JavaPlugin {
         config.addDefault("modules.mechanics", true);
         config.addDefault("modules.chat-commands", true);
         config.addDefault("modules.jank", true);
-        config.addDefault("modules-enchantments", true);
+        config.addDefault("modules.enchantments", true);
         config.addDefault("options.login-notes", true);
         config.addDefault("options.xp-store-on-death", true);
         config.addDefault("options.xp-death-percent-high", 1);
