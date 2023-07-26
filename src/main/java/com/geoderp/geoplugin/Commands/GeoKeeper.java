@@ -47,7 +47,7 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                     }
                     else if (args.length == 2) {
                         // store or retrive self
-                        if (args[0].equals("retrieve")) {
+                        if (args[0].equals("retrieve") || args[0].equals("withdraw")) {
                             retrieveXP(sender, player, args);
                             int[] amount = XP.getLevelOfXP(getStoredXP(player));
                             sender.sendMessage("§aYou currently have " + amount[0] + " levels and " + amount[1] + " points stored.");
@@ -66,7 +66,7 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                         if (sender.hasPermission("GeoPlugin.commands.geokeeper.others")) {
                             player = Bukkit.getPlayer(args[2]);
                             if (player != null) {
-                                if (args[0].equals("retrieve")) {
+                                if (args[0].equals("retrieve") || args[0].equals("withdraw")) {
                                     retrieveXP(sender, player, args);
                                     int[] amount = XP.getLevelOfXP(getStoredXP(player));
                                     sender.sendMessage("§a" + player.getName() + " currently have " + amount[0] + " levels and " + amount[1] + " points stored.");
@@ -118,7 +118,7 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                     // store or retrieve other
                     Player player = Bukkit.getPlayer(args[2]);
                     if (player != null) {
-                        if (args[0].equals("retrieve")) {
+                        if (args[0].equals("retrieve") || args[0].equals("withdraw")) {
                             retrieveXP(sender, player, args);
                             int[] amount = XP.getLevelOfXP(getStoredXP(player));
                             sender.sendMessage("§a" + player.getName() + " currently have " + amount[0] + " levels and " + amount[1] + " points stored.");
@@ -161,6 +161,7 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
         
         subCommands.add("store");
         subCommands.add("retrieve");
+        subCommands.add("withdraw");
         List<String> values = Arrays.asList("all", "[<levelCount>]");
         List<String> completions = new ArrayList<String>();
 

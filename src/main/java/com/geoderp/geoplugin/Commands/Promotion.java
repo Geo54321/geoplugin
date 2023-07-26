@@ -1,5 +1,6 @@
 package com.geoderp.geoplugin.Commands;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,13 +11,15 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.util.StringUtil;
 
-public class Promotion implements CommandExecutor {
-    private List<String> ranks = Arrays.asList("Mu","Kappa","Zeta","Delta","Phi","Gamma","Psi","Omega");
+public class Promotion implements CommandExecutor, TabCompleter {
+    private List<String> ranks = Arrays.asList("mu","kappa","zeta","delta","phi","gamma","psi","omega");
 
     public Promotion() {
 
@@ -39,6 +42,28 @@ public class Promotion implements CommandExecutor {
             sender.sendMessage("§cSorry but you do not have permission to use the /promotion command.");
         }
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        ArrayList<String> players = new ArrayList<String>();
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            players.add(player.getName().toString());
+        }
+        
+        List<String> completions = new ArrayList<String>();
+
+        if (args.length == 1) {
+            StringUtil.copyPartialMatches(args[0], players, completions);
+            return completions;
+        }
+        else if (args.length == 2) {
+            StringUtil.copyPartialMatches(args[1], ranks, completions);
+            return completions;
+        }
+        else {
+            return null;
+        }
     }
 
     public boolean isValidArgs(String[] args) {
@@ -71,21 +96,21 @@ public class Promotion implements CommandExecutor {
 
     public String getRankColorCode(String rank) {
         switch (rank) {
-            case "Mu":
+            case "mu":
                 return "§c";
-            case "Kappa":
+            case "kappa":
                 return "§6";
-            case "Zeta":
+            case "zeta":
                 return "§e";
-            case "Delta":
+            case "delta":
                 return "§2";
-            case "Phi":
+            case "phi":
                 return "§5";
-            case "Gamma":
+            case "gamma":
                 return "§9";
-            case "Psi":
+            case "psi":
                 return "§b";
-            case "Omega":
+            case "omega":
                 return "§a";
             default:
                 return "§4";
@@ -100,28 +125,28 @@ public class Promotion implements CommandExecutor {
         meta.setPower(1);
 
         switch (rank) {
-            case "Mu":
+            case "mu":
                 meta.addEffect(FireworkEffect.builder().withColor(Color.RED).flicker(true).trail(true).build());
                 break;
-            case "Kappa":
+            case "kappa":
                 meta.addEffect(FireworkEffect.builder().withColor(Color.ORANGE).flicker(true).trail(true).build());
                 break;
-            case "Zeta":
+            case "zeta":
                 meta.addEffect(FireworkEffect.builder().withColor(Color.YELLOW).flicker(true).trail(true).build());
                 break;
-            case "Delta":
+            case "delta":
                 meta.addEffect(FireworkEffect.builder().withColor(Color.GREEN).flicker(true).trail(true).build());
                 break;
-            case "Phi":
+            case "phi":
                 meta.addEffect(FireworkEffect.builder().withColor(Color.PURPLE).flicker(true).trail(true).build());
                 break;
-            case "Gamma":
+            case "gamma":
                 meta.addEffect(FireworkEffect.builder().withColor(Color.BLUE).flicker(true).trail(true).build());
                 break;
-            case "Psi":
+            case "psi":
                 meta.addEffect(FireworkEffect.builder().withColor(Color.AQUA).flicker(true).trail(true).build());
                 break;
-            case "Omega":
+            case "omega":
                 meta.addEffect(FireworkEffect.builder().withColor(Color.LIME).flicker(true).trail(true).build());
                 break;
             default:

@@ -36,7 +36,7 @@ public class Explode implements CommandExecutor {
                     death.detonate();
                 }
 
-                splashZone.getWorld().playSound(splashZone, Sound.ENTITY_GENERIC_EXPLODE, (float) 8.0, (float) 0.56);
+                splashZone.getWorld().playSound(splashZone, Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, (float) 1.0, (float) 0.95);
             }
             else {
                 sender.sendMessage("§cSorry but you must be a player to explode :)");
