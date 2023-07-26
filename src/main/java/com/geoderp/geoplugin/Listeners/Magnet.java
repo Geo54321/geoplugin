@@ -35,9 +35,11 @@ public class Magnet implements Listener {
             // Don't do magnet
         }
         else {
-            if (Math.abs(event.getFrom().distance(event.getTo())) > 0) {
-                doMagnet(player);
-            }   
+            if (player.getInventory().firstEmpty() != -1) {
+                if (Math.abs(event.getFrom().distance(event.getTo())) > 0) {
+                    doMagnet(player);
+                }   
+            }
         }
     }
 

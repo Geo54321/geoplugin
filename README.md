@@ -79,12 +79,13 @@ Allows right click harvesting and auto-replanting of the crops listed below.
 Adds a couple silly chat commands.
 
 ### Commands
-| Command | Permission Node | Description |
-|----|----|----|
-| /heart (name) | GeoPlugin.commands.heart | Shows your love for everyone or the target name |
-| /rng (max) (count) | GeoPlugin.commands.rng | Generate a 1-20 with no arguments, or a given number of numbers with given maximum |
-| /blamegeo | GeoPlugin.commands.blamegeo | Assigns blame |
-| /promotion [username] [rank] | GeoPlugin.commands.promotion | Annouces promotion of given player to the given rank in chat, and launches corresponding fireworks on the given player, and sends them a title message |
+| Command | Permission Node | Description | Alias(es) |
+|----|----|----|----|
+| /heart (name) | GeoPlugin.commands.heart | Shows your love for everyone or the target name | /love |
+| /rng (max) (count) | GeoPlugin.commands.rng | Generate a 1-20 with no arguments, or a given number of numbers with given maximum | /dice |
+| /blamegeo | GeoPlugin.commands.blamegeo | Assigns blame | /blame, /geo |
+| /poggers | GeoPlugin.commands.blamegeo | Assigns blame | /pog |
+| /promotion [username] [rank] | GeoPlugin.commands.promotion | Annouces promotion of given player to the given rank in chat, and launches corresponding fireworks on the given player, and sends them a title message | /congrats, /promo |
 
 # All Permission Nodes as a Tree
 
@@ -110,8 +111,11 @@ Adds a couple silly chat commands.
         - GeoPlugin.commands.rng -- Allows usage of /rng
         - GeoPlugin.commands.blamegeo -- Allows usage of /blamegeo
         - GeoPlugin.commands.promotion -- Allows usage of /promotion
+        - GeoPlugin.commands.poggers -- Allows usage of /poggers
+        - GeoPlugin.commands.poggers.others -- Allows usage of /poggers on others
     - GeoPlugin.jank.*
         - GeoPlugin.jank.mountTeleport -- Allows mounts to teleport with the player
+        - GeoPlugin.commands.explode -- Allows usage of /explode
     - GeoPlugin.geoplugin.*
         - GeoPlugin.commands.geoplugin - Allows use of /geoplugin
         - GeoPlugin.commands.geoplugin.reload - Allows reload of config file

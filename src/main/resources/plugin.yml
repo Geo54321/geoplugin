@@ -1,11 +1,13 @@
 main: com.geoderp.geoplugin.Main
 name: GeoPlugin
-version: 2.2.1
+version: 2.3.2
 author: GeoDerp
 api-version: 1.19
 description: Add player notes, XP storage, and more!
 prefix: BlameGeo!
 commands:
+  please:
+    permissions: GeoPlugin.commands.please
   gnote:
     description: Used for adding, viewing and removing player notes
     permissions: GeoPlugin.commands.gnote
@@ -43,16 +45,30 @@ commands:
     description: Used for assigning blame
     permissions: GeoPlugin.commands.blamegeo
     aliases:
-      blame
+      [blame, geo]
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /blamegeo"
   promotion:
     description: Used to annouce a player's promotion
     permissions: GeoPlugin.commands.promotion
     aliases:
-      congrats
+      [congrats, promo]
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /promotion [username] [rank]"
+  poggers:
+    descriptions: Used to pog
+    permissions: GeoPlugin.commands.poggers
+    aliases:
+      pog
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /poggers (username)"
+  explode:
+    description: Used to explode yourself. Violently.
+    permissions: GeoPlugin.commands.explode
+    aliases: 
+      selfdestruct
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /explode"
 permissions:
   GeoPlugin.commands.gnote.remove:
     description: Allows removing notes
@@ -68,6 +84,9 @@ permissions:
       GeoPlugin.notes.loginNote: true
   GeoPlugin.commands.geokeeper.others:
     description: Allows usage of other players geokeepers
+    default: op
+  GeoPlugin.commands.poggers.others:
+    description: Allow usage of poggers on others
     default: op
   GeoPlugin.geokeeper.death.high:
     description: Allows partial/full storage of XP on death
@@ -128,11 +147,14 @@ permissions:
       GeoPlugin.commands.rng: true
       GeoPlugin.commands.blamegeo: true
       GeoPlugin.commands.promotion: true
+      GeoPlugin.commands.poggers: true
+      GeoPlugin.commands.poggers.others: true
   GeoPlugin.jank.*:
     description: Allows usage of the jank bits of the plugin
     default: op
     children:
       GeoPlugin.jank.mountTeleport: true
+      GeoPlugin.commands.explode: true
   GeoPlugin.geoplugin.*:
     description: Allows all of the geoplugin command
     default: op
@@ -148,4 +170,6 @@ permissions:
       GeoPlugin.geokeeper.*: true
       GeoPlugin.mechanics.*: true
       GeoPlugin.geoplugin.*: true
+      GeoPlugin.chat.*: true
+      GeoPlugin.jank.*: true
   

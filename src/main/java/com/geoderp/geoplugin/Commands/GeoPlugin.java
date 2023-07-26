@@ -33,7 +33,7 @@ public class GeoPlugin implements CommandExecutor {
             else if (args[0].equals("magnet") && plugin.getConfig().getBoolean("modules.mechanics")) {
                 if (sender.hasPermission("GeoPlugin.commands.geoplugin.magnet") && sender instanceof Player) {
                     Player player = (Player) sender;
-                    if (args.length == 1) {
+                    if (args.length == 1 && player.getInventory().getItemInMainHand().hasItemMeta()) {
                         ItemStack item = player.getInventory().getItemInMainHand();
                         if (item != null) {
                             item = makeMagnet(item);

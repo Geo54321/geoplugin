@@ -4,12 +4,17 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.geoderp.geoplugin.Commands.BlameGeo;
+import com.geoderp.geoplugin.Commands.Explode;
 import com.geoderp.geoplugin.Commands.GNote;
 import com.geoderp.geoplugin.Commands.GeoKeeper;
 import com.geoderp.geoplugin.Commands.GeoPlugin;
 import com.geoderp.geoplugin.Commands.Heart;
+import com.geoderp.geoplugin.Commands.Please;
+import com.geoderp.geoplugin.Commands.Poggers;
 import com.geoderp.geoplugin.Commands.Promotion;
 import com.geoderp.geoplugin.Commands.RNG;
+import com.geoderp.geoplugin.Enchants.GeoEnchants;
+import com.geoderp.geoplugin.Enchants.Hewing;
 import com.geoderp.geoplugin.Listeners.DeathXP;
 import com.geoderp.geoplugin.Listeners.ExtraGrow;
 import com.geoderp.geoplugin.Listeners.Harvest;
@@ -56,9 +61,16 @@ public class Main extends JavaPlugin {
             this.getCommand("rng").setExecutor(new RNG());
             this.getCommand("blamegeo").setExecutor(new BlameGeo());
             this.getCommand("promotion").setExecutor(new Promotion());
+            this.getCommand("poggers").setExecutor(new Poggers());
         }
         if (getConfig().getBoolean("modules.jank")) {
             getServer().getPluginManager().registerEvents(new Teleport(), this);
+            this.getCommand("explode").setExecutor(new Explode());
+        }
+        if (getConfig().getBoolean("modules-enchantments")) {
+            GeoEnchants.registerAll();
+            getServer().getPluginManager().registerEvents(new Hewing(this), this);
+            this.getCommand("please").setExecutor(new Please());
         }
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
     }
@@ -78,6 +90,7 @@ public class Main extends JavaPlugin {
         config.addDefault("modules.mechanics", true);
         config.addDefault("modules.chat-commands", true);
         config.addDefault("modules.jank", true);
+        config.addDefault("modules-enchantments", true);
         config.addDefault("options.login-notes", true);
         config.addDefault("options.xp-store-on-death", true);
         config.addDefault("options.xp-death-percent-high", 1);
@@ -87,6 +100,7 @@ public class Main extends JavaPlugin {
         config.addDefault("options.weak-magnet-range", 2);
         config.addDefault("options.sneak-disable-magnet", true);
         config.addDefault("options.growth-chance-percent",0.3);
+        config.addDefault("options.hewing-max-block-break", 50);
 
         config.options().copyDefaults(true);
         saveConfig();
