@@ -24,7 +24,35 @@ commands:
     aliases:
       [geoxp, gxp, gkeeper]
     permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage /geokeeper store [all/# of levels] or /geokeeper retreive [all/# of levels]"
+    usage: "Usage: /geokeeper store [all/# of levels] or /geokeeper retreive [all/# of levels]"
+  heart:
+    description: Used for showing love to other players
+    permissions: GeoPlugin.commands.heart
+    aliases:
+      love
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /heart (name)"
+  rng:
+    description: Used for generating random numbers
+    permissions: GeoPlugin.commands.rng
+    aliases:
+      dice
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /rng [range max] (# of results)"
+  blamegeo:
+    description: Used for assigning blame
+    permissions: GeoPlugin.commands.blamegeo
+    aliases:
+      blame
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /blamegeo"
+  promotion:
+    description: Used to annouce a player's promotion
+    permissions: GeoPlugin.commands.promotion
+    aliases:
+      congrats
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /promotion [username] [rank]"
 permissions:
   GeoPlugin.commands.gnote.remove:
     description: Allows removing notes
@@ -65,7 +93,10 @@ permissions:
   GeoPlugin.mechanics.harvest:
     description: Allows usage of right click harvest
     default: op
-  GeoPlugin.mechanics.mountTeleport:
+  GeoPlugin.mechanics.grow:
+    description: Allows usage of the extra bonemeal growth
+    default: op
+  GeoPlugin.jank.mountTeleport:
     description: Allows usage of teleporting mounts
     default: op
   GeoPlugin.notes.*:
@@ -88,7 +119,20 @@ permissions:
       GeoPlugin.mechanics.magnet.strong: true
       GeoPlugin.mechanics.magnet.weak: true
       GeoPlugin.mechanics.harvest: true
-      GeoPlugin.mechanics.mountTeleport: true
+      GeoPlugin.mechanics.grow: true
+  GeoPlugin.chat.*:
+    description: Allows use of all parts of the mechanics module
+    default: op
+    children:
+      GeoPlugin.commands.heart: true
+      GeoPlugin.commands.rng: true
+      GeoPlugin.commands.blamegeo: true
+      GeoPlugin.commands.promotion: true
+  GeoPlugin.jank.*:
+    description: Allows usage of the jank bits of the plugin
+    default: op
+    children:
+      GeoPlugin.jank.mountTeleport: true
   GeoPlugin.geoplugin.*:
     description: Allows all of the geoplugin command
     default: op

@@ -57,7 +57,7 @@ Strong: Default pickup range of 4 blocks
 Weak: Rabbit Foot, Heart of the Sea, Ghast Tear, Nautilus Shell
 Strong: Enchanted Golden Apple (Notch Apple), Nether Star, Netherite Ingot
 
-### Command
+### Commands
 | Command | Permission Node | Description |
 |----|----|----|
 | /geoplugin magnet | GeoPlugin.commands.geoplugin.magnet | Add magnet lore to main hand item |
@@ -74,6 +74,17 @@ Allows right click harvesting and auto-replanting of the crops listed below.
 - Carrots
 - Beetroot
 - Nether Wart
+
+## Chat Commands
+Adds a couple silly chat commands.
+
+### Commands
+| Command | Permission Node | Description |
+|----|----|----|
+| /heart (name) | GeoPlugin.commands.heart | Shows your love for everyone or the target name |
+| /rng (max) (count) | GeoPlugin.commands.rng | Generate a 1-20 with no arguments, or a given number of numbers with given maximum |
+| /blamegeo | GeoPlugin.commands.blamegeo | Assigns blame |
+| /promotion [username] [rank] | GeoPlugin.commands.promotion | Annouces promotion of given player to the given rank in chat, and launches corresponding fireworks on the given player, and sends them a title message |
 
 # All Permission Nodes as a Tree
 
@@ -93,7 +104,14 @@ Allows right click harvesting and auto-replanting of the crops listed below.
         - GeoPlugin.mechanics.magnet.weak -- Allows usage of weak magnets
         - GeoPlugin.mechanics.magnet.strong -- Allows usage of strong magnets
         - GeoPlugin.mechanics.harvest -- Allows usage of the right click harvest
-        - GeoPlugin.mechanics.mountTeleport -- Allows mounts to teleport with the player
+        - GeoPlugin.mechanics.grow -- Allows usage of the extra bonemeal growth
+    - GeoPlugin.chat.*
+        - GeoPlugin.commands.heart -- Allows usage of /heart
+        - GeoPlugin.commands.rng -- Allows usage of /rng
+        - GeoPlugin.commands.blamegeo -- Allows usage of /blamegeo
+        - GeoPlugin.commands.promotion -- Allows usage of /promotion
+    - GeoPlugin.jank.*
+        - GeoPlugin.jank.mountTeleport -- Allows mounts to teleport with the player
     - GeoPlugin.geoplugin.*
         - GeoPlugin.commands.geoplugin - Allows use of /geoplugin
         - GeoPlugin.commands.geoplugin.reload - Allows reload of config file

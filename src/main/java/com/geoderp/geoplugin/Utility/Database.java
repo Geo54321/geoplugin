@@ -266,6 +266,29 @@ public class Database {
         }
     }
 
+    public ArrayList<String[]> getAllXP() {
+        String sql = "SELECT player, amount FROM xp ORDER BY amount LIMIT 10";
+        ArrayList<String[]> all = new ArrayList<String[]>();
+
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String[] player = new String[2];
+                player[0] = rs.getString("player");
+                player[1] = String.valueOf(rs.getInt("amount"));
+
+                all.add(player);
+            }
+            return all;
+        }
+        catch (Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error getting all player xp in " + dbPath + " database: " + e);
+        }
+        return all;
+    }
+
     public void createJoinDateTable() {
         try {
             Statement stmt = db.createStatement();

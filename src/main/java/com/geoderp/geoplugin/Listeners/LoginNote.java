@@ -31,6 +31,7 @@ public class LoginNote implements Listener {
             LocalDate date = LocalDate.now();
             String dateString = date.toString();
             dbObj.addJoined(loggedPlayer.getUniqueId().toString(), dateString);
+            Bukkit.broadcastMessage("§c" + loggedPlayer.getName() + " joined the server for the first time!");
         }
 
         // Login Notes

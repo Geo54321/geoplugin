@@ -23,20 +23,26 @@ public class DeathXP implements Listener {
         Player player = event.getEntity();
         if (player.hasPermission("GeoPlugin.geokeeper.death.high") || player.hasPermission("GeoPlugin.geokeeper.death.medium") || player.hasPermission("GeoPlugin.geokeeper.death.low")) {
             int fromDeath = XP.getXPOfLevel(player.getLevel());
+            double deathPercent = 0;
             fromDeath += player.getExp() * (XP.getXPOfLevel(player.getLevel()+1) - XP.getXPOfLevel(player.getLevel()));
 
             if (player.hasPermission("GeoPlugin.geokeeper.death.high")) {
-                fromDeath = (int) Math.ceil(fromDeath * plugin.getConfig().getDouble("options.xp-death-percent-high"));
+                deathPercent = plugin.getConfig().getDouble("options.xp-death-percent-high");
+                fromDeath = (int) Math.ceil(fromDeath * deathPercent);
             } 
             else if (player.hasPermission("GeoPlugin.geokeeper.death.medium")) {
-                fromDeath = (int) Math.ceil(fromDeath * plugin.getConfig().getDouble("options.xp-death-percent-medium"));
+                deathPercent = plugin.getConfig().getDouble("options.xp-death-percent-medium");
+                fromDeath = (int) Math.ceil(fromDeath * deathPercent);
             }
             else if (player.hasPermission("GeoPlugin.geokeeper.death.low")) {
-                fromDeath = (int) Math.ceil(fromDeath * plugin.getConfig().getDouble("options.xp-death-percent-low"));
+                deathPercent = plugin.getConfig().getDouble("options.xp-death-percent-low");
+                fromDeath = (int) Math.ceil(fromDeath * deathPercent);
             }
 
             int stored = getStoredXP(player);
             dbObj.updateXP(stored+fromDeath, player.getUniqueId().toString());
+            player.sendMessage("§2" + (int) deathPercent*100 + "% of your XP was safely stored.");
+            player.sendMessage("§aYou currently have " + stored+fromDeath + " XP points stored.");
             event.setDroppedExp(0);
         }
     }

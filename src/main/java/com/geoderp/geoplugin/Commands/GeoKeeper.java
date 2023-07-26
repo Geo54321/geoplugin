@@ -3,6 +3,7 @@ package com.geoderp.geoplugin.Commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -29,24 +30,32 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                 Player player = (Player) sender;
                 if (args.length > 0) {
                     if (args.length == 1) {
-                        // view other
-                        player = Bukkit.getPlayer(args[0]);
-                        if (player != null) {
-                            sender.sendMessage("§2" + player.getName() + " currently has " + getStoredXP(player) + " XP points stored.");
+                        if (args[0].equals("top")) {
+                            displayTop(sender);
                         }
                         else {
-                            sender.sendMessage("§cInvalid target player. Please try again.");
+                            // view other
+                            player = Bukkit.getPlayer(args[0]);
+                            if (player != null) {
+                                int[] amount = XP.getLevelOfXP(getStoredXP(player));
+                                sender.sendMessage("§2" + player.getName() + " currently has " + amount[0] + " levels and " + amount[1] + " points stored.");
+                            }
+                            else {
+                                sender.sendMessage("§cInvalid target player. Please try again.");
+                            }
                         }
                     }
                     else if (args.length == 2) {
                         // store or retrive self
                         if (args[0].equals("retrieve")) {
                             retrieveXP(sender, player, args);
-                            sender.sendMessage("§aYou currently have " + getStoredXP(player) + " XP points stored.");
+                            int[] amount = XP.getLevelOfXP(getStoredXP(player));
+                            sender.sendMessage("§aYou currently have " + amount[0] + " levels and " + amount[1] + " points stored.");
                         }
                         else if (args[0].equals("store")) {
                             storeXP(sender, player, args);
-                            sender.sendMessage("§aYou currently have " + getStoredXP(player) + " XP points stored.");
+                            int[] amount = XP.getLevelOfXP(getStoredXP(player));
+                            sender.sendMessage("§aYou currently have " + amount[0] + " levels and " + amount[1] + " points stored.");
                         }
                         else {
                             sender.sendMessage("§cInvalid subcommand, use store or retrieve.");
@@ -59,11 +68,13 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                             if (player != null) {
                                 if (args[0].equals("retrieve")) {
                                     retrieveXP(sender, player, args);
-                                    sender.sendMessage("§a" + player.getName() + " currently have " + getStoredXP(player) + " XP points stored.");
+                                    int[] amount = XP.getLevelOfXP(getStoredXP(player));
+                                    sender.sendMessage("§a" + player.getName() + " currently have " + amount[0] + " levels and " + amount[1] + " points stored.");
                                 }
                                 else if (args[0].equals("store")) {
                                     storeXP(sender, player, args);
-                                    sender.sendMessage("§a" + player.getName() + "You currently have " + getStoredXP(player) + " XP points stored.");
+                                    int[] amount = XP.getLevelOfXP(getStoredXP(player));
+                                    sender.sendMessage("§a" + player.getName() + "You currently have " + amount[0] + " levels and " + amount[1] + " points stored.");
                                 }
                                 else {
                                     sender.sendMessage("§cInvalid subcommand, use store or retrieve.");
@@ -82,18 +93,25 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                     }
                 }
                 else {
-                    sender.sendMessage("§aYou currently have " + getStoredXP(player) + " XP points stored.");
+                    int[] amount = XP.getLevelOfXP(getStoredXP(player));
+                    sender.sendMessage("§aYou currently have " + amount[0] + " levels and " + amount[1] + " points stored.");
                 }
             }
             else {
                 if (args.length == 1) {
-                    // view other
-                    Player player = Bukkit.getPlayer(args[0]);
-                    if (player != null) {
-                        sender.sendMessage("§2" + player.getName() + " currently has " + getStoredXP(player) + " XP points stored.");
+                    if (args[0].equals("top")) {
+                        displayTop(sender);
                     }
                     else {
-                        sender.sendMessage("§cInvalid target player. Please try again.");
+                        // view other
+                        Player player = Bukkit.getPlayer(args[0]);
+                        if (player != null) {
+                            int[] amount = XP.getLevelOfXP(getStoredXP(player));
+                            sender.sendMessage("§2" + player.getName() + " currently has " + amount[0] + " levels and " + amount[1] + " points stored.");
+                        }
+                        else {
+                            sender.sendMessage("§cInvalid target player. Please try again.");
+                        }
                     }
                 }
                 else if (args.length == 3) {
@@ -102,11 +120,13 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
                     if (player != null) {
                         if (args[0].equals("retrieve")) {
                             retrieveXP(sender, player, args);
-                            sender.sendMessage("§a" + player.getName() + " currently have " + getStoredXP(player) + " XP points stored.");
+                            int[] amount = XP.getLevelOfXP(getStoredXP(player));
+                            sender.sendMessage("§a" + player.getName() + " currently have " + amount[0] + " levels and " + amount[1] + " points stored.");
                         }
                         else if (args[0].equals("store")) {
                             storeXP(sender, player, args);
-                            sender.sendMessage("§a" + player.getName() + "You currently have " + getStoredXP(player) + " XP points stored.");
+                            int[] amount = XP.getLevelOfXP(getStoredXP(player));
+                            sender.sendMessage("§a" + player.getName() + " currently has " + amount[0] + " levels and " + amount[1] + " points stored.");
                         }
                         else {
                             sender.sendMessage("§cInvalid subcommand, use store or retrieve.");
@@ -293,6 +313,19 @@ public class GeoKeeper implements CommandExecutor, TabCompleter {
         }
         catch (Exception e) {
             sender.sendMessage("§cIncorrect parameter, either use 'all' or an integer number of levels.");
+        }
+    }
+
+    public void displayTop(CommandSender sender) {
+        ArrayList<String[]> top = dbObj.getAllXP();
+        
+        sender.sendMessage("§2 --- Top GeoKeepers ---");
+        int count = 1;
+        for (String[] entry : top) {
+            String name = Bukkit.getOfflinePlayer(UUID.fromString(entry[0])).getName();
+            int[] amount = XP.getLevelOfXP(Integer.parseInt(entry[1]));
+            sender.sendMessage("§a" + count + ". " + name + ": " + amount[0] + " levels, " + amount[1] + " points.");
+            count++;
         }
     }
 }
