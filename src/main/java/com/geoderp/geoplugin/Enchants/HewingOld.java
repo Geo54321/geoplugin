@@ -13,10 +13,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Hewing implements Listener {
+public class HewingOld implements Listener {
     JavaPlugin plugin;
     
-    public Hewing(JavaPlugin plugin) {
+    public HewingOld(JavaPlugin plugin) {
         this.plugin = plugin;
     }
 

@@ -14,7 +14,7 @@ import com.geoderp.geoplugin.Commands.Poggers;
 import com.geoderp.geoplugin.Commands.Promotion;
 import com.geoderp.geoplugin.Commands.RNG;
 import com.geoderp.geoplugin.Enchants.GeoEnchants;
-import com.geoderp.geoplugin.Enchants.Hewing;
+import com.geoderp.geoplugin.Enchants.HewingOld;
 import com.geoderp.geoplugin.Listeners.DeathXP;
 import com.geoderp.geoplugin.Listeners.ExtraGrow;
 import com.geoderp.geoplugin.Listeners.Harvest;
@@ -69,7 +69,7 @@ public class Main extends JavaPlugin {
         }
         if (getConfig().getBoolean("modules.enchantments")) {
             GeoEnchants.registerAll();
-            getServer().getPluginManager().registerEvents(new Hewing(this), this);
+            getServer().getPluginManager().registerEvents(new HewingOld(this), this);
             this.getCommand("please").setExecutor(new Please());
         }
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
