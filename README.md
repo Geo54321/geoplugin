@@ -8,7 +8,7 @@ This is a Minecraft Spigot plugin that adds features we use on the MCNSA communi
 All the content in this plugin is separated into different distinct modules. These modules can be disabled by finding the module you want to disable in the config file and setting it to false.
 
 ## Notes Module
-Notes are stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/GeoDB.db
+Notes are stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/GeoNotesDB.db
 
 **Aliases: /gnotes /note /notes**
 
@@ -21,7 +21,7 @@ Notes are stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/Geo
 |  | GeoPlugin.notes.loginNote | Displays the most recent note on players when they login |
 
 ## XP Storage Module
-Player XP is stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/GeoDB.db
+Player XP is stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/GeoXPDB.db
 
 **Aliases: /geoxp /gxp /gkeeper**
 

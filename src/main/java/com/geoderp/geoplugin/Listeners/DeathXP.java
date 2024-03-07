@@ -6,14 +6,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.geoderp.geoplugin.Utility.Database;
 import com.geoderp.geoplugin.Utility.XP;
+import com.geoderp.geoplugin.Utility.XPDatabase;
 
 public class DeathXP implements Listener {
-    public Database dbObj;
+    public XPDatabase dbObj;
     public JavaPlugin plugin;
 
-    public DeathXP (Database dbObj, JavaPlugin plugin) {
+    public DeathXP (XPDatabase dbObj, JavaPlugin plugin) {
         this.dbObj = dbObj;
         this.plugin = plugin;
     }

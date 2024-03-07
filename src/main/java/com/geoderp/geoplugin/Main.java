@@ -9,25 +9,24 @@ import com.geoderp.geoplugin.Commands.GNote;
 import com.geoderp.geoplugin.Commands.GeoKeeper;
 import com.geoderp.geoplugin.Commands.GeoPlugin;
 import com.geoderp.geoplugin.Commands.Heart;
-import com.geoderp.geoplugin.Commands.Please;
 import com.geoderp.geoplugin.Commands.Poggers;
 import com.geoderp.geoplugin.Commands.Promotion;
 import com.geoderp.geoplugin.Commands.RNG;
-import com.geoderp.geoplugin.Enchants.GeoEnchants;
-import com.geoderp.geoplugin.Enchants.HewingOld;
 import com.geoderp.geoplugin.Listeners.DeathXP;
 import com.geoderp.geoplugin.Listeners.ExtraGrow;
 import com.geoderp.geoplugin.Listeners.Harvest;
 import com.geoderp.geoplugin.Listeners.LoginNote;
 import com.geoderp.geoplugin.Listeners.Magnet;
 import com.geoderp.geoplugin.Listeners.Teleport;
-import com.geoderp.geoplugin.Utility.Database;
+import com.geoderp.geoplugin.Utility.NotesDatabase;
+import com.geoderp.geoplugin.Utility.XPDatabase;
 
 import java.util.ArrayList;
 import java.io.File;
 
 public class Main extends JavaPlugin {
-    public Database dbObj;
+    public NotesDatabase notesDB;
+    public XPDatabase xpDB;
     public FileConfiguration config = getConfig();
     
     @Override
@@ -41,21 +40,30 @@ public class Main extends JavaPlugin {
         loadDefaultConfigFile();
         saveDefaultConfig();
         
-        // Notes Modules
-        dbObj = new Database(this, "GeoDB.db");
+        // Database setups
+        notesDB = new NotesDatabase(this, "GeoDB.db");
+        xpDB = new XPDatabase(this, "GeoXPDB.db");
+
+        // Notes Module
         if (getConfig().getBoolean("modules.notes")) {
-            this.getCommand("gnote").setExecutor(new GNote(dbObj));
-            getServer().getPluginManager().registerEvents(new LoginNote(dbObj, this), this);
+            this.getCommand("gnote").setExecutor(new GNote(notesDB));
+            getServer().getPluginManager().registerEvents(new LoginNote(notesDB, this), this);
         }
+
+        // XP Storage Module
         if (getConfig().getBoolean("modules.xp-storage")) {
-            this.getCommand("geokeeper").setExecutor(new GeoKeeper(dbObj));
-            getServer().getPluginManager().registerEvents(new DeathXP(dbObj, this), this);
+            this.getCommand("geokeeper").setExecutor(new GeoKeeper(xpDB));
+            getServer().getPluginManager().registerEvents(new DeathXP(xpDB, this), this);
         }
+
+        // Mechanics Module
         if (getConfig().getBoolean("modules.mechanics")) {
             getServer().getPluginManager().registerEvents(new Magnet(this), this);
             getServer().getPluginManager().registerEvents(new Harvest(), this);
             getServer().getPluginManager().registerEvents(new ExtraGrow(this), this);
         }
+
+        // Chat Module
         if (getConfig().getBoolean("modules.chat-commands")) {
             this.getCommand("heart").setExecutor(new Heart());
             this.getCommand("rng").setExecutor(new RNG());
@@ -63,21 +71,27 @@ public class Main extends JavaPlugin {
             this.getCommand("promotion").setExecutor(new Promotion());
             this.getCommand("poggers").setExecutor(new Poggers());
         }
+
+        // Jank Module
         if (getConfig().getBoolean("modules.jank")) {
             getServer().getPluginManager().registerEvents(new Teleport(), this);
             this.getCommand("explode").setExecutor(new Explode());
         }
-        if (getConfig().getBoolean("modules.enchantments")) {
-            GeoEnchants.registerAll();
-            getServer().getPluginManager().registerEvents(new HewingOld(this), this);
-            this.getCommand("please").setExecutor(new Please());
-        }
+
+        //Enchantment Module
+        // if (getConfig().getBoolean("modules.enchantments")) {
+        //     GeoEnchants.registerAll();
+        //     getServer().getPluginManager().registerEvents(new HewingOld(this), this);
+        //     this.getCommand("please").setExecutor(new Please());
+        // }
+
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
     }
     @Override
     public void onDisable() {
         getLogger().info("Been a pleasure. Truly.");
-        dbObj.closeDatabase();
+        notesDB.closeDatabase();
+        xpDB.closeDatabase();
     }
 
     private void loadDefaultConfigFile() {

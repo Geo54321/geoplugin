@@ -13,13 +13,13 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-import com.geoderp.geoplugin.Utility.Database;
 import com.geoderp.geoplugin.Utility.XP;
+import com.geoderp.geoplugin.Utility.XPDatabase;
 
 public class GeoKeeper implements CommandExecutor, TabCompleter {
-    public Database dbObj;
+    public XPDatabase dbObj;
     
-    public GeoKeeper(Database dbObj) {
+    public GeoKeeper(XPDatabase dbObj) {
         this.dbObj = dbObj;
     }
 

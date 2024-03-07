@@ -8,16 +8,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import com.geoderp.geoplugin.Utility.Database;
+import com.geoderp.geoplugin.Utility.NotesDatabase;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.UUID;
 
 public class GNote implements CommandExecutor{
-    public Database dbObj;
+    public NotesDatabase dbObj;
     
-    public GNote(Database dbObj) {
+    public GNote(NotesDatabase dbObj) {
         this.dbObj = dbObj;
     }
 
@@ -26,7 +26,7 @@ public class GNote implements CommandExecutor{
         if (sender.hasPermission("GeoPlugin.commands.gnote")) {
             if(args.length > 0) {
                 if(args.length > 1) {
-                    if(args[0].equals("remove")) {
+                    if(args[0].equals("remove") || args[0].equals("delete")) {
                         if (sender.hasPermission("GeoPlugin.commands.gnote.remove")) {
                             removeNote(sender, args[1]);
                         }

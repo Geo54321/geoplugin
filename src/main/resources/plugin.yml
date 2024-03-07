@@ -1,6 +1,6 @@
 main: com.geoderp.geoplugin.Main
 name: GeoPlugin
-version: 2.3.3
+version: 2.4.1
 author: GeoDerp
 api-version: 1.19
 description: Add player notes, XP storage, and more!
