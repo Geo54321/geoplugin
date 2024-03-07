@@ -18,6 +18,7 @@ public class NotesDatabase {
         connect();
         createNoteTable();
         createJoinDateTable();
+        createPlaytimeTable();
     }
 
     public void connect() {
@@ -67,8 +68,11 @@ public class NotesDatabase {
         if (table.equals("notes")) {
             sql = "SELECT id FROM notes WHERE "+ criteria +" = ?";
         } 
-        else if (table.equals("xp")) {
-            sql = "SELECT id FROM xp WHERE "+ criteria +" = ?";
+        else if (table.equals("playtime")) {
+            sql = "SELECT id FROM playtime WHERE "+ criteria +" = ?";
+        }
+        else if (table.equals("joined")) {
+            sql = "SELECT id FROM joined WHERE "+ criteria +" = ?";
         }
 
         try {
@@ -254,5 +258,183 @@ public class NotesDatabase {
         }
 
         return joined;
+    }
+
+    // PLAYTIME TABLE INTERACTIONS
+
+    public void createPlaytimeTable() {
+        try {
+            Statement stmt = db.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS playtime(id integer PRIMARY KEY, player string, current integer, previous integer, lastseen integer);";
+            stmt.executeUpdate(sql);
+            stmt.close();
+        }
+        catch (Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error creating playtime table in " + dbPath + " database: " + e);
+        }
+    }
+
+    public void addPlayer(String player){
+        player = player.trim();
+        player = player.strip();
+
+        String sql = "INSERT INTO playtime(player, current, previous) VALUES(?,?,?)";
+
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            stmt.setString(1, player);
+            stmt.setLong(2, 0);
+            stmt.setLong(3, 0);
+            stmt.executeUpdate();
+            stmt.close();
+        }
+        catch (Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error inserting into " + dbPath + " database: " + e);
+        }
+    }
+
+    public void updatePlaytime(String player, long time, long seen) {
+        player = player.trim();
+        player = player.strip();
+
+        String sql = "UPDATE playtime SET current = ?, lastseen = ?" + "WHERE player = ?";
+
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            stmt.setLong(1, time);
+            stmt.setLong(2, seen);
+            stmt.setString(3, player);
+            stmt.executeUpdate();
+        }
+        catch(Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error updating amount in " + dbPath + " database: " + e);
+        }
+    }
+
+    public long getPlaytime(String player, String type) {
+        player = player.trim();
+        player = player.strip();
+
+        String sql = "SELECT " + type + " FROM playtime WHERE player = ?";
+
+        long result = -1;
+
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            stmt.setString(1, player);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                result = rs.getLong(type);
+            }
+        }
+        catch(Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error selecting from " + dbPath + " database: " + e);
+        }
+
+        return result;
+    }
+
+    public ArrayList<String[]> getTopPlaytimes() {
+        ArrayList<String[]> results = new ArrayList<String[]>();
+        ArrayList<String[]> topCurrent = getTopCurrent();
+        ArrayList<String[]> topTotal = getTopTotal();
+
+        for(String[] item : topCurrent) {
+            results.add(item);
+        }
+        for(String[] item : topTotal) {
+            results.add(item);
+        }
+        
+        return results;
+    }
+
+    public ArrayList<String[]> getTopCurrent() {
+        String sql = "SELECT player, current FROM playtime ORDER BY current DESC LIMIT 5";
+
+        ArrayList<String[]> results = new ArrayList<String[]>();
+
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                String[] item = new String[2];
+                item[0] = rs.getString("player");
+                item[1] = String.valueOf(rs.getLong("current"));
+                results.add(item);
+            }
+        }
+        catch(Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error selecting from " + dbPath + " database: " + e);
+        }
+
+        return results;
+    }
+
+    public ArrayList<String[]> getTopTotal() {
+        String sql = "SELECT player, current, total FROM playtime ORDER BY current+total DESC LIMIT 5";
+
+        ArrayList<String[]> results = new ArrayList<String[]>();
+
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                String[] item = new String[2];
+                item[0] = rs.getString("player");
+                item[1] = String.valueOf(rs.getLong("current") + rs.getLong("total"));
+                results.add(item);
+            }
+        }
+        catch(Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error selecting from " + dbPath + " database: " + e);
+        }
+
+        return results;
+    }
+
+    public void updatePlaytimeByID(long[] newVals) {
+        String sql = "UPDATE playtime SET current = ?, previous = ? " + "WHERE id = ?";
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            stmt.setLong(1, newVals[1]);
+            stmt.setLong(2, newVals[2]);
+            stmt.setLong(3, newVals[0]);
+            stmt.executeUpdate();
+        }
+        catch(Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error updating amount in " + dbPath + " database: " + e);
+        }
+    }
+
+    public void changeVersion() {
+        ArrayList<long[]> results = new ArrayList<long[]>();
+        
+        String sql = "SELECT player, current, previous from playtime";
+
+        try {
+            PreparedStatement stmt = db.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                long[] item = new long[3];
+                item[0] = rs.getLong("id");
+                item[1] = rs.getLong("current");
+                item[2] = rs.getLong("previous");
+                results.add(item);
+            }
+        }
+        catch(Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error selecting from " + dbPath + " database: " + e);
+        }
+
+        for(long[] item : results) {
+            item[2] += item[1];
+            item[1] = 0;
+            updatePlaytimeByID(item);
+        }
     }
 }

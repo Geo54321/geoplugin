@@ -14,7 +14,7 @@ commands:
     aliases:
       [note, notes, gnotes]
     permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage: /gnote [playername] or /gnote [playerName] [note] or /gnote [recent] or /gnote [remove] [noteID]"
+    usage: "Usage: /gnote [username] or /gnote [playerName] [note] or /gnote [recent] or /gnote [remove] [noteID]"
   geoplugin:
     description: Used for plugin level control
     permissions: GeoPlugin.commands.geoplugin
@@ -69,6 +69,13 @@ commands:
       selfdestruct
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /explode"
+  playtime:
+    description: Used to display the playtime of yourself or others
+    permissions: GeoPlugin.commands.playtime
+    aliases: 
+      [gplaytime, played, gplayed]
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /playtime or /playtime top or /playtime (username)"
 permissions:
   GeoPlugin.commands.gnote.remove:
     description: Allows removing notes
@@ -76,12 +83,16 @@ permissions:
   GeoPlugin.notes.loginNote:
     description: Allow viewing login note
     default: op
+  GeoPlugin.notes.loginPlaytime:
+    description: Allows viewing of login playtime
+    default: op
   GeoPlugin.notes.moderator:
     description: Collection of permissions for moderator
     default: op
     children:
       GeoPlugin.commands.gnote: true
       GeoPlugin.notes.loginNote: true
+      GeoPlugin.notes.loginPlaytime: true
   GeoPlugin.commands.geokeeper.others:
     description: Allows usage of other players geokeepers
     default: op

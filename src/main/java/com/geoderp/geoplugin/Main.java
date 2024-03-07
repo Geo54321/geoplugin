@@ -1,7 +1,10 @@
 package com.geoderp.geoplugin;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.geoderp.geoplugin.Commands.BlameGeo;
 import com.geoderp.geoplugin.Commands.Explode;
@@ -9,6 +12,7 @@ import com.geoderp.geoplugin.Commands.GNote;
 import com.geoderp.geoplugin.Commands.GeoKeeper;
 import com.geoderp.geoplugin.Commands.GeoPlugin;
 import com.geoderp.geoplugin.Commands.Heart;
+import com.geoderp.geoplugin.Commands.Playtime;
 import com.geoderp.geoplugin.Commands.Poggers;
 import com.geoderp.geoplugin.Commands.Promotion;
 import com.geoderp.geoplugin.Commands.RNG;
@@ -50,6 +54,12 @@ public class Main extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new LoginNote(notesDB, this), this);
         }
 
+        // Playtime Module
+        if (getConfig().getBoolean("modules.playtime")) {
+            this.getCommand("playtime").setExecutor(new Playtime(notesDB));
+            getServer().getPluginManager().registerEvents(new LoginNote(notesDB, this), this);
+        }
+
         // XP Storage Module
         if (getConfig().getBoolean("modules.xp-storage")) {
             this.getCommand("geokeeper").setExecutor(new GeoKeeper(xpDB));
@@ -78,7 +88,7 @@ public class Main extends JavaPlugin {
             this.getCommand("explode").setExecutor(new Explode());
         }
 
-        //Enchantment Module
+        // Enchantment Module
         // if (getConfig().getBoolean("modules.enchantments")) {
         //     GeoEnchants.registerAll();
         //     getServer().getPluginManager().registerEvents(new HewingOld(this), this);
@@ -86,9 +96,21 @@ public class Main extends JavaPlugin {
         // }
 
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
+
+        // 5-minute scheduler to update playtime
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                updateAllPlaytimes();
+            }
+        }.runTaskTimer(this,0,6000);
     }
+    
     @Override
     public void onDisable() {
+        getLogger().info("Updating Playtime.");
+        updateAllPlaytimes();
+
         getLogger().info("Been a pleasure. Truly.");
         notesDB.closeDatabase();
         xpDB.closeDatabase();
@@ -105,6 +127,7 @@ public class Main extends JavaPlugin {
         config.addDefault("modules.chat-commands", true);
         config.addDefault("modules.jank", true);
         config.addDefault("modules.enchantments", true);
+        config.addDefault("modules.playtime", true);
         config.addDefault("options.login-notes", true);
         config.addDefault("options.xp-store-on-death", true);
         config.addDefault("options.xp-death-percent-high", 1);
@@ -119,5 +142,15 @@ public class Main extends JavaPlugin {
         config.options().copyDefaults(true);
         saveConfig();
         reloadConfig();
+    }
+
+    private void updateAllPlaytimes() {
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            String uuid = player.getUniqueId().toString();
+            long now = System.currentTimeMillis();
+            long then = notesDB.getPlaytime(uuid, "lastseen");
+
+            notesDB.updatePlaytime(uuid, now-then, now);
+        }
     }
 }

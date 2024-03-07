@@ -9,7 +9,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.geoderp.geoplugin.Utility.NotesDatabase;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -25,14 +24,6 @@ public class LoginNote implements Listener {
     @EventHandler
     public void onPlayerLogin(PlayerLoginEvent event) {
         Player loggedPlayer = event.getPlayer();
-
-        // First Joined DB
-        if (dbObj.getJoined(loggedPlayer.getUniqueId().toString()) == null) {
-            LocalDate date = LocalDate.now();
-            String dateString = date.toString();
-            dbObj.addJoined(loggedPlayer.getUniqueId().toString(), dateString);
-            Bukkit.broadcastMessage("§c" + loggedPlayer.getName() + " joined the server for the first time!");
-        }
 
         // Login Notes
         if(plugin.getConfig().getBoolean("options.login-notes")) {
