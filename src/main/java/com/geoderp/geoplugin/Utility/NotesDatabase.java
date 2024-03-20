@@ -335,21 +335,6 @@ public class NotesDatabase {
         return result;
     }
 
-    public ArrayList<String[]> getTopPlaytimes() {
-        ArrayList<String[]> results = new ArrayList<String[]>();
-        ArrayList<String[]> topCurrent = getTopCurrent();
-        ArrayList<String[]> topTotal = getTopTotal();
-
-        for(String[] item : topCurrent) {
-            results.add(item);
-        }
-        for(String[] item : topTotal) {
-            results.add(item);
-        }
-        
-        return results;
-    }
-
     public ArrayList<String[]> getTopCurrent() {
         String sql = "SELECT player, current FROM playtime ORDER BY current DESC LIMIT 5";
 
