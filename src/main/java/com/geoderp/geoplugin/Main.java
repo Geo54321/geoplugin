@@ -23,6 +23,7 @@ import com.geoderp.geoplugin.Listeners.Harvest;
 import com.geoderp.geoplugin.Listeners.LoginNote;
 import com.geoderp.geoplugin.Listeners.Magnet;
 import com.geoderp.geoplugin.Listeners.Teleport;
+import com.geoderp.geoplugin.Listeners.XPKeeperIntercept;
 import com.geoderp.geoplugin.Utility.NotesDatabase;
 import com.geoderp.geoplugin.Utility.XPDatabase;
 
@@ -60,7 +61,6 @@ public class Main extends JavaPlugin {
             this.getCommand("playtime").setExecutor(new Playtime(notesDB));
             this.getCommand("advanceserverversion").setExecutor(new AdvanceVersion(notesDB,xpDB));
 
-
             // 5-minute scheduler to update playtime
             new BukkitRunnable() {
                 @Override
@@ -74,6 +74,7 @@ public class Main extends JavaPlugin {
         if (getConfig().getBoolean("modules.xp-storage")) {
             this.getCommand("geokeeper").setExecutor(new GeoKeeper(xpDB));
             getServer().getPluginManager().registerEvents(new DeathXP(xpDB, this), this);
+            getServer().getPluginManager().registerEvents(new XPKeeperIntercept(), this);
         }
 
         // Mechanics Module
