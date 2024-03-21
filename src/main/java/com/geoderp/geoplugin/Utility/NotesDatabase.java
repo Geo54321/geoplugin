@@ -422,4 +422,17 @@ public class NotesDatabase {
             updatePlaytimeByID(item);
         }
     }
+
+    public long[] convertTime(long total) {
+        long[] times = new long[3];
+        // Convert to minutes
+        total = total/1000/60;
+        // Adds the amount of days to return array
+        times[0] = Math.floorDiv(total, 1440);
+        // Adds the amount of hours to return array
+        times[1] = Math.floorDiv((total - (times[0]*1440)), 60);
+        // Adds the amount of minutes to return array
+        times[2] = total - ((times[0]*1440)+(times[1]*60)); 
+        return times;
+    }
 }

@@ -76,6 +76,10 @@ commands:
       [gplaytime, played, gplayed]
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /playtime or /playtime top or /playtime (username)"
+  advanceserverversion:
+    description: Used to "advance" the game version or the server. Moves current playtime to previous and drops the current xp table.
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: /advanceserverversion
 permissions:
   GeoPlugin.commands.gnote.remove:
     description: Allows removing notes

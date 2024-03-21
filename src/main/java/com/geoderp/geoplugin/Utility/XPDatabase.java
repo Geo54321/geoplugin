@@ -149,4 +149,20 @@ public class XPDatabase {
         }
         return all;
     }
+
+    public void changeVersion() {
+        // Drop old XP table
+        try {
+            Statement stmt = db.createStatement();
+            String sql = "DROP TABLE xp";
+            stmt.executeUpdate(sql);
+            stmt.close();
+        }
+        catch (Exception e) {
+            Plugin.getLogger().log(Level.INFO, "Error dropping table in " + dbPath + " database: " + e);
+        }
+
+        // Make new empty table
+        createXPTable();
+    }
 }

@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.geoderp.geoplugin.Commands.AdvanceVersion;
 import com.geoderp.geoplugin.Commands.BlameGeo;
 import com.geoderp.geoplugin.Commands.Explode;
 import com.geoderp.geoplugin.Commands.GNote;
@@ -57,7 +58,16 @@ public class Main extends JavaPlugin {
         // Playtime Module
         if (getConfig().getBoolean("modules.playtime")) {
             this.getCommand("playtime").setExecutor(new Playtime(notesDB));
-            getServer().getPluginManager().registerEvents(new LoginNote(notesDB, this), this);
+            this.getCommand("advanceserverversion").setExecutor(new AdvanceVersion(notesDB,xpDB));
+
+
+            // 5-minute scheduler to update playtime
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    updateAllPlaytimes();
+                }
+            }.runTaskTimer(this,0,6000);
         }
 
         // XP Storage Module
@@ -97,13 +107,7 @@ public class Main extends JavaPlugin {
 
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
 
-        // 5-minute scheduler to update playtime
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                updateAllPlaytimes();
-            }
-        }.runTaskTimer(this,0,6000);
+        
     }
     
     @Override
@@ -129,6 +133,7 @@ public class Main extends JavaPlugin {
         config.addDefault("modules.enchantments", true);
         config.addDefault("modules.playtime", true);
         config.addDefault("options.login-notes", true);
+        config.addDefault("options.login-playtime", true);
         config.addDefault("options.xp-store-on-death", true);
         config.addDefault("options.xp-death-percent-high", 1);
         config.addDefault("options.xp-death-percent-medium", 0.50);

@@ -70,12 +70,12 @@ public class Playtime implements CommandExecutor {
     public void displayTime(CommandSender sender, String uuid) {
         long current = dbObj.getPlaytime(uuid, "current");
         long total = dbObj.getPlaytime(uuid, "previous") + current;
-        long[] times = convertTime(total);
+        long[] times = dbObj.convertTime(total);
         String name = Bukkit.getOfflinePlayer(UUID.fromString(uuid)).getName();
 
         sender.sendMessage("§5 --- " + name + "'s Playtime ---");
         sender.sendMessage("§5Total: §d" + times[0] + "d " + times[1] + "h " + times[2] + "m");
-        times = convertTime(current);
+        times = dbObj.convertTime(current);
         sender.sendMessage("§5Current Map: §d" + times[0] + "d " + times[1] + "h " + times[2] + "m");
     }
 
@@ -87,7 +87,7 @@ public class Playtime implements CommandExecutor {
         int count = 1;
         for (String[] entry : topTop) {
             String name = Bukkit.getOfflinePlayer(UUID.fromString(entry[0])).getName();
-            long[] times = convertTime(Long.parseLong(entry[1]));
+            long[] times = dbObj.convertTime(Long.parseLong(entry[1]));
             sender.sendMessage("§d" + count + ". " + name + ": " + times[0] + "d " + times[1] + "h " + times[2] + "m");
             count++;
         }
@@ -96,22 +96,11 @@ public class Playtime implements CommandExecutor {
         count = 1;
         for (String[] entry : currentTop) {
             String name = Bukkit.getOfflinePlayer(UUID.fromString(entry[0])).getName();
-            long[] times = convertTime(Long.parseLong(entry[1]));
+            long[] times = dbObj.convertTime(Long.parseLong(entry[1]));
             sender.sendMessage("§d" + count + ". " + name + ": " + times[0] + "d " + times[1] + "h " + times[2] + "m");
             count++;
         }
     }
 
-    public long[] convertTime(long total) {
-        long[] times = new long[3];
-        // Convert to minutes
-        total = total/1000/60;
-        // Adds the amount of days to return array
-        times[0] = Math.floorDiv(total, 1440);
-        // Adds the amount of hours to return array
-        times[1] = Math.floorDiv((total - (times[0]*1440)), 60);
-        // Adds the amount of minutes to return array
-        times[2] = total - ((times[0]*1440)+(times[1]*60)); 
-        return times;
-    }
+    
 }
