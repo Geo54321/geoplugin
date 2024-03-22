@@ -20,6 +20,7 @@ import com.geoderp.geoplugin.Commands.RNG;
 import com.geoderp.geoplugin.Listeners.DeathXP;
 import com.geoderp.geoplugin.Listeners.ExtraGrow;
 import com.geoderp.geoplugin.Listeners.Harvest;
+import com.geoderp.geoplugin.Listeners.JankStep;
 import com.geoderp.geoplugin.Listeners.LoginNote;
 import com.geoderp.geoplugin.Listeners.Magnet;
 import com.geoderp.geoplugin.Listeners.Teleport;
@@ -99,6 +100,7 @@ public class Main extends JavaPlugin {
         // Jank Module
         if (getConfig().getBoolean("modules.jank")) {
             getServer().getPluginManager().registerEvents(new Teleport(), this);
+            getServer().getPluginManager().registerEvents(new JankStep(), this);
             this.getCommand("explode").setExecutor(new Explode());
         }
 

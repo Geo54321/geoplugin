@@ -140,6 +140,9 @@ permissions:
   GeoPlugin.jank.mountTeleport:
     description: Allows usage of teleporting mounts
     default: op
+  GeoPlugin.jank.jankStep:
+    description: Jank as fuck step assist
+    default: op
   GeoPlugin.notes.*:
     description: Allows all parts of the notes module
     default: op
@@ -176,6 +179,7 @@ permissions:
     default: op
     children:
       GeoPlugin.jank.mountTeleport: true
+      GeoPlugin.jank.jankStep: true
       GeoPlugin.commands.explode: true
   GeoPlugin.geoplugin.*:
     description: Allows all of the geoplugin command

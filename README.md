@@ -123,6 +123,7 @@ Creates an in-game guidebook for the different parts of the plugin. Will generat
         - GeoPlugin.commands.poggers.others -- Allows usage of /poggers on others
     - GeoPlugin.jank.*
         - GeoPlugin.jank.mountTeleport -- Allows mounts to teleport with the player
+        - GeoPlugin.jank.jankStep -- Allows jank step to activate
         - GeoPlugin.commands.explode -- Allows usage of /explode
     - GeoPlugin.geoplugin.*
         - GeoPlugin.commands.geoplugin -- Allows use of /geoplugin
