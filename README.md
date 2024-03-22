@@ -17,7 +17,7 @@ Notes are stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/Geo
 | /gnote [playerName] | GeoPlugin.commands.gnote | Views all notes for the given player |
 | /gnote [playerName] [note] | GeoPlugin.commands.gnote | Creates a new note for the given player |
 | /gnote recent | GeoPlugin.commands.gnote | Views the 5 most recent notes |
-| /gnote remove [noteID] | GeoPlugin.commands.gnote.remove | Remove the note with given ID from the database |
+| /gnote [remove/delete] [noteID] | GeoPlugin.commands.gnote.remove | Remove the note with given ID from the database |
 |  | GeoPlugin.notes.loginNote | Displays the most recent note on players when they login |
 
 ## XP Storage Module
@@ -87,6 +87,14 @@ Adds a couple silly chat commands.
 | /poggers | GeoPlugin.commands.blamegeo | Assigns blame | /pog |
 | /promotion [username] [rank] | GeoPlugin.commands.promotion | Annouces promotion of given player to the given rank in chat, and launches corresponding fireworks on the given player, and sends them a title message | /congrats, /promo |
 
+## Guidebook
+Creates an in-game guidebook for the different parts of the plugin. Will generate pages based on what is enabled and what the config is currently set to on the server.
+
+### Command
+| Command | Permission Node | Description | Alias(es) |
+|----|----|----|----|
+| /guidebook | GeoPlugin.commands.guidebook | Generates guidebook | /gbook |
+
 # All Permission Nodes as a Tree
 
 - GeoPlugin.*
@@ -117,6 +125,7 @@ Adds a couple silly chat commands.
         - GeoPlugin.jank.mountTeleport -- Allows mounts to teleport with the player
         - GeoPlugin.commands.explode -- Allows usage of /explode
     - GeoPlugin.geoplugin.*
-        - GeoPlugin.commands.geoplugin - Allows use of /geoplugin
-        - GeoPlugin.commands.geoplugin.reload - Allows reload of config file
-        - GeoPlugin.commands.geoplugin.magnet - Allows usage of the magnet subcommand
+        - GeoPlugin.commands.geoplugin -- Allows use of /geoplugin
+        - GeoPlugin.commands.geoplugin.reload -- Allows reload of config file
+        - GeoPlugin.commands.geoplugin.magnet -- Allows usage of the magnet subcommand
+    - GeoPlugin.commands.guidebook -- Allows use of /guidebook

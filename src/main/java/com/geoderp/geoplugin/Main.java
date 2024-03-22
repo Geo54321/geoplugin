@@ -50,6 +50,9 @@ public class Main extends JavaPlugin {
         notesDB = new NotesDatabase(this, "GeoDB.db");
         xpDB = new XPDatabase(this, "GeoXPDB.db");
 
+        // Guidebook
+
+
         // Notes Module
         if (getConfig().getBoolean("modules.notes")) {
             this.getCommand("gnote").setExecutor(new GNote(notesDB));
@@ -127,12 +130,12 @@ public class Main extends JavaPlugin {
         config.options().setHeader(header);
 
         config.addDefault("modules.notes", true);
+        config.addDefault("modules.playtime", true);
         config.addDefault("modules.xp-storage", true);
         config.addDefault("modules.mechanics", true);
         config.addDefault("modules.chat-commands", true);
         config.addDefault("modules.jank", true);
         config.addDefault("modules.enchantments", true);
-        config.addDefault("modules.playtime", true);
         config.addDefault("options.login-notes", true);
         config.addDefault("options.login-playtime", true);
         config.addDefault("options.xp-store-on-death", true);

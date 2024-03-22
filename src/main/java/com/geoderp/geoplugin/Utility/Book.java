@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
@@ -37,12 +36,15 @@ public class Book {
         return bookMeta.getLore();
     }
 
-    public ItemStack createBook(Player player) {
+    public ItemStack createBook() {
         book.setItemMeta(bookMeta);
         return book;
     }
     
     public void setTitle(String title) {
+        if(title.length() > titleLimit) {
+            title = title.substring(0,titleLimit-1);
+        }
         bookMeta.setTitle(title);
     }
 
@@ -64,8 +66,9 @@ public class Book {
         if(pageCount < pageLimit) {
             // Not exceeding page limit
             if(text.length() > charLimit) {
-                String thisPage = text.substring(0,1023);
-                String remaining = text.substring(1024);
+                String thisPage = text.substring(0,charLimit-1);
+                String remaining = text.substring(charLimit);
+
                 // Adds max characters to this page
                 bookMeta.addPage(thisPage);
                 pageCount++;

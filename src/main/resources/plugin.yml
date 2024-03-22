@@ -80,6 +80,13 @@ commands:
     description: Used to "advance" the game version or the server. Moves current playtime to previous and drops the current xp table.
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: /advanceserverversion
+  guidebook:
+    description: Used to spawn a guidebook for the enabled modules in the plugin
+    permissions: GeoPlugin.commands.guidebook
+    aliases:
+      gbook
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /guidebook"
 permissions:
   GeoPlugin.commands.gnote.remove:
     description: Allows removing notes
@@ -187,4 +194,5 @@ permissions:
       GeoPlugin.geoplugin.*: true
       GeoPlugin.chat.*: true
       GeoPlugin.jank.*: true
+      GeoPlugin.commands.guidebook: true
   
