@@ -51,9 +51,6 @@ public class Main extends JavaPlugin {
         notesDB = new NotesDatabase(this, "GeoDB.db");
         xpDB = new XPDatabase(this, "GeoXPDB.db");
 
-        // Guidebook
-
-
         // Notes Module
         if (getConfig().getBoolean("modules.notes")) {
             this.getCommand("gnote").setExecutor(new GNote(notesDB));

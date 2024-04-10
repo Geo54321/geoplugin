@@ -80,13 +80,13 @@ commands:
     description: Used to "advance" the game version or the server. Moves current playtime to previous and drops the current xp table.
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: /advanceserverversion
-  guidebook:
-    description: Used to spawn a guidebook for the enabled modules in the plugin
-    permissions: GeoPlugin.commands.guidebook
+  geoinfo:
+    description: Used to display info about commands ingame
+    permissions: GeoPlugin.commands.geoinfo
     aliases:
-      gbook
+      [ginfo, geohelp, ghelp]
     permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage: /guidebook"
+    usage: "Usage: /geoinfo (topic)"
 permissions:
   GeoPlugin.commands.gnote.remove:
     description: Allows removing notes
@@ -104,6 +104,7 @@ permissions:
       GeoPlugin.commands.gnote: true
       GeoPlugin.notes.loginNote: true
       GeoPlugin.notes.loginPlaytime: true
+      GeoPPlugin.commands.geoinfo.staff: true
   GeoPlugin.commands.geokeeper.others:
     description: Allows usage of other players geokeepers
     default: op
@@ -142,6 +143,9 @@ permissions:
     default: op
   GeoPlugin.jank.jankStep:
     description: Jank as fuck step assist
+    default: op
+  GeoPlugin.commands.geoinfo.staff:
+    description: Allows access to the staff version of geoinfo
     default: op
   GeoPlugin.notes.*:
     description: Allows all parts of the notes module
@@ -198,5 +202,4 @@ permissions:
       GeoPlugin.geoplugin.*: true
       GeoPlugin.chat.*: true
       GeoPlugin.jank.*: true
-      GeoPlugin.commands.guidebook: true
   

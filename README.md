@@ -75,6 +75,9 @@ Allows right click harvesting and auto-replanting of the crops listed below.
 - Beetroot
 - Nether Wart
 
+## Bonemeal Other Things
+Allows bonemealing to duplicate lily pads and all small flowers except wither roses.
+
 ## Chat Commands
 Adds a couple silly chat commands.
 
@@ -87,13 +90,16 @@ Adds a couple silly chat commands.
 | /poggers | GeoPlugin.commands.blamegeo | Assigns blame | /pog |
 | /promotion [username] [rank] | GeoPlugin.commands.promotion | Annouces promotion of given player to the given rank in chat, and launches corresponding fireworks on the given player, and sends them a title message | /congrats, /promo |
 
-## Guidebook
-Creates an in-game guidebook for the different parts of the plugin. Will generate pages based on what is enabled and what the config is currently set to on the server.
+## Geoinfo
+Display information about this plugin and it's features in chat. Without a topic it will display every valid topic you can get info about and a brief message about the plugin.
+
+**Aliases: /ginfo /geohelp /ghelp**
 
 ### Command
-| Command | Permission Node | Description | Alias(es) |
-|----|----|----|----|
-| /guidebook | GeoPlugin.commands.guidebook | Generates guidebook | /gbook |
+| Command | Permission Node | Description |
+|----|----|----|
+| /geoinfo (topic) | GeoPlugin.commands.geoinfo | Display info about this plugin in-game  |
+|  | GeoPlugin.commands.geoinfo.staff | Displays additional information relevant to staff members  |
 
 # All Permission Nodes as a Tree
 
@@ -102,6 +108,8 @@ Creates an in-game guidebook for the different parts of the plugin. Will generat
         - GeoPlugin.notes.moderator
             - GeoPlugin.commands.gnote -- Allows use of /gnote
             - GeoPlugin.notes.loginNote -- Allows view of play login note
+            - GeoPlugin.notes.loginPlaytime -- Allows view of login playtime
+            - GeoPlugin.commands.geoinfo.staff -- Shows additional information when using /geoinfo
         - GeoPlugin.commands.gnote.remove -- Allows removal of notes with /gnote
     - GeoPlugin.geokeeper.*
         - GeoPlugin.commands.geokeeper -- Allows use of /geokeeper
@@ -129,4 +137,4 @@ Creates an in-game guidebook for the different parts of the plugin. Will generat
         - GeoPlugin.commands.geoplugin -- Allows use of /geoplugin
         - GeoPlugin.commands.geoplugin.reload -- Allows reload of config file
         - GeoPlugin.commands.geoplugin.magnet -- Allows usage of the magnet subcommand
-    - GeoPlugin.commands.guidebook -- Allows use of /guidebook
+    - GeoPlugin.commands.geoinfo -- Allows use of /geoinfo
