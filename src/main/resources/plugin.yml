@@ -3,7 +3,7 @@ name: GeoPlugin
 version: 2.4.1
 author: GeoDerp
 api-version: 1.19
-description: Add player notes, XP storage, and more!
+description: Add player notes, XP storage, and much more!
 prefix: BlameGeo!
 commands:
   please:

@@ -10,6 +10,7 @@ import com.geoderp.geoplugin.Commands.AdvanceVersion;
 import com.geoderp.geoplugin.Commands.BlameGeo;
 import com.geoderp.geoplugin.Commands.Explode;
 import com.geoderp.geoplugin.Commands.GNote;
+import com.geoderp.geoplugin.Commands.GeoInfo;
 import com.geoderp.geoplugin.Commands.GeoKeeper;
 import com.geoderp.geoplugin.Commands.GeoPlugin;
 import com.geoderp.geoplugin.Commands.Heart;
@@ -50,6 +51,9 @@ public class Main extends JavaPlugin {
         // Database setups
         notesDB = new NotesDatabase(this, "GeoDB.db");
         xpDB = new XPDatabase(this, "GeoXPDB.db");
+
+        // GeoInfo
+        this.getCommand("geoinfo").setExecutor(new GeoInfo(this));
 
         // Notes Module
         if (getConfig().getBoolean("modules.notes")) {
