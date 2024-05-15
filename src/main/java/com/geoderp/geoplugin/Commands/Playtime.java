@@ -24,6 +24,9 @@ public class Playtime implements CommandExecutor {
             if (args.length == 1) {
                 if (args[0].equals("top")) {
                     // display top playtimes
+                    for(Player player : Bukkit.getOnlinePlayers()) {
+                        updateTime(player.getUniqueId().toString());
+                    }
                     displayTop(sender);
                 }
                 else {

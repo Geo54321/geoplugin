@@ -87,7 +87,7 @@ Adds a couple silly chat commands.
 | /heart (name) | GeoPlugin.commands.heart | Shows your love for everyone or the target name | /love |
 | /rng (max) (count) | GeoPlugin.commands.rng | Generate a 1-20 with no arguments, or a given number of numbers with given maximum | /dice |
 | /blamegeo | GeoPlugin.commands.blamegeo | Assigns blame | /blame, /geo |
-| /poggers | GeoPlugin.commands.blamegeo | Assigns blame | /pog |
+| /poggers | GeoPlugin.commands.blamegeo | Poggers | /pog |
 | /promotion [username] [rank] | GeoPlugin.commands.promotion | Annouces promotion of given player to the given rank in chat, and launches corresponding fireworks on the given player, and sends them a title message | /congrats, /promo |
 
 ## Geoinfo
