@@ -13,14 +13,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.geoderp.geoplugin.Utility.MagnetRequirements;
+import com.geoderp.geoplugin.Utility.ArtifactRequirements;
 
 public class Magnet implements Listener {
     JavaPlugin plugin;
     private int weakRange;
     private int strongRange;
-    private Material[] validStrongMaterials = MagnetRequirements.validStrongMaterials;
-    private Material[] validWeakMaterials = MagnetRequirements.validWeakMaterials;
+    private Material[] validStrongMaterials = ArtifactRequirements.validStrongMagnetMaterials;
+    private Material[] validWeakMaterials = ArtifactRequirements.validWeakMagnetMaterials;
 
     public Magnet(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -68,7 +68,7 @@ public class Magnet implements Listener {
                 Material offhandMaterial = offhandItem.getType();
                 
                 if (offhandMeta.hasLore()) {
-                    if (offhandMeta.getLore().equals(MagnetRequirements.lore)) {
+                    if (offhandMeta.getLore().equals(ArtifactRequirements.magnetLore)) {
                         for (Material mat : validStrongMaterials) {
                             if (mat.equals(offhandMaterial)) {
                                 return "strong";

@@ -13,7 +13,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.StringUtil;
 
-import com.geoderp.geoplugin.Utility.MagnetRequirements;
+import com.geoderp.geoplugin.Utility.ArtifactRequirements;
 
 public class GeoInfo implements CommandExecutor, TabCompleter {
     private JavaPlugin plugin;
@@ -56,8 +56,8 @@ public class GeoInfo implements CommandExecutor, TabCompleter {
             // Feature Specifics
             this.magnetRanges[0] = plugin.getConfig().getInt("options.strong-magnet-range");
             this.magnetRanges[1] = plugin.getConfig().getInt("options.weak-magnet-range");
-            this.strongMaterials = MagnetRequirements.validStrongMaterials;
-            this.weakMaterials = MagnetRequirements.validWeakMaterials;
+            this.strongMaterials = ArtifactRequirements.validStrongMagnetMaterials;
+            this.weakMaterials = ArtifactRequirements.validWeakMagnetMaterials;
             this.magnetSneak = plugin.getConfig().getBoolean("options.sneak-disable-magnet");
             this.bonemealChance = plugin.getConfig().getDouble("options.growth-chance-percent");
         }

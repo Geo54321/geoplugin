@@ -8,8 +8,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.StringUtil;
+
+import com.geoderp.geoplugin.Utility.ArtifactRequirements;
 
 public class GeoArtifact implements CommandExecutor, TabCompleter {
     private ArrayList<String> validArtifacts = new ArrayList<String>();
@@ -27,7 +32,7 @@ public class GeoArtifact implements CommandExecutor, TabCompleter {
         else if (args.length == 1) {
             if (sender instanceof Player) {
                 if (isValidArtifact(args[0])) {
-                    createArtifact(sender, args);
+                    createArtifact(sender, args, false);
                 }
             }
             else {
@@ -36,7 +41,7 @@ public class GeoArtifact implements CommandExecutor, TabCompleter {
         }
         else if (args.length == 2) {
             if (isValidArtifact(args[0]) && isValidTarget(args[1])) {
-                createArtifact(sender, args);
+                createArtifact(sender, args, true);
             }
         }
         else {
@@ -85,10 +90,56 @@ public class GeoArtifact implements CommandExecutor, TabCompleter {
         return false;
     }
 
-    public void createArtifact(CommandSender sender, String[] args) {
+    public void createArtifact(CommandSender sender, String[] args, Boolean other) {
         String artifactType = args[0];
-        String target = args[1];
+        String name;
+        if (other) {
+            name = args[1];
+        }
+        else {
+            name = sender.getName();
+        }
+        Player target = Bukkit.getPlayer(name);
 
+        if (target.getInventory().firstEmpty() == -1) {
+            sender.sendMessage("");
+        }
+
+        switch (artifactType) {
+            case "magnet":
+
+                break;
+            case "zoomies":
+                
+                break;
+        }
+    }
+
+    public void spawnMagnet(Player player, String strength) {
+        ItemStack magnet;
+        if (strength.equals("strong")) {
+            magnet = new ItemStack(ArtifactRequirements.validStrongMagnetMaterials[0]);
+        }
+        else {
+            magnet = new ItemStack(ArtifactRequirements.validWeakMagnetMaterials[0]);
+        }
         
+        magnet.setAmount(1);
+
+        magnet = makeMagnet(magnet);
+        
+        player.getInventory().addItem(magnet);
+    }
+
+    public ItemStack makeMagnet(ItemStack magnet) {
+        ItemMeta magnetMeta = magnet.getItemMeta();
+
+        magnetMeta.setDisplayName(ArtifactRequirements.magnetName);
+        magnetMeta.setLore(ArtifactRequirements.magnetLore);
+
+        magnet.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+        magnet.setItemMeta(magnetMeta);
+
+        return magnet;
     }
 }

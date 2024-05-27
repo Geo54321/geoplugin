@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.geoderp.geoplugin.Utility.MagnetRequirements;
+import com.geoderp.geoplugin.Utility.ArtifactRequirements;
 
 public class GeoPlugin implements CommandExecutor {
     JavaPlugin plugin;
@@ -71,10 +71,10 @@ public class GeoPlugin implements CommandExecutor {
     public void spawnMagnet(Player player, String strength) {
         ItemStack magnet;
         if (strength.equals("strong")) {
-            magnet = new ItemStack(MagnetRequirements.validStrongMaterials[0]);
+            magnet = new ItemStack(ArtifactRequirements.validStrongMagnetMaterials[0]);
         }
         else {
-            magnet = new ItemStack(MagnetRequirements.validWeakMaterials[0]);
+            magnet = new ItemStack(ArtifactRequirements.validWeakMagnetMaterials[0]);
         }
         
         magnet.setAmount(1);
@@ -87,8 +87,8 @@ public class GeoPlugin implements CommandExecutor {
     public ItemStack makeMagnet(ItemStack magnet) {
         ItemMeta magnetMeta = magnet.getItemMeta();
 
-        magnetMeta.setDisplayName(MagnetRequirements.name);
-        magnetMeta.setLore(MagnetRequirements.lore);
+        magnetMeta.setDisplayName(ArtifactRequirements.magnetName);
+        magnetMeta.setLore(ArtifactRequirements.magnetLore);
 
         magnet.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
         magnet.setItemMeta(magnetMeta);

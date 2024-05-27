@@ -1,7 +1,5 @@
 package com.geoderp.geoplugin.Listeners;
 
-import java.util.ArrayList;
-
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,13 +10,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.geoderp.geoplugin.Utility.ArtifactRequirements;
+
 public class Zoomies implements Listener {
-    ArrayList<String> lore = new ArrayList<String>();
-
-    public Zoomies() {
-        lore.add("§5GeoZoomies");
-    }
-
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
         int permissionLevel = getPermissionLevel(event.getPlayer());
@@ -56,18 +50,18 @@ public class Zoomies implements Listener {
                 Material itemMaterial = item.getType();
                 
                 if (itemMeta.hasLore()) {
-                    if (itemMeta.getLore().equals(lore)) {
-                        if (itemMaterial.equals(Material.FEATHER)) {
+                    if (itemMeta.getLore().equals(ArtifactRequirements.zoomiesLore)) {
+                        if (itemMaterial.equals(ArtifactRequirements.validZoomiesMaterials[0])) {
                             if (1 > speedLevel) {
                                 speedLevel = 1;
                             }
                         }
-                        else if (itemMaterial.equals(Material.BLAZE_POWDER)) {
+                        else if (itemMaterial.equals(ArtifactRequirements.validZoomiesMaterials[1])) {
                             if (2 > speedLevel) {
                                 speedLevel = 2;
                             }
                         }
-                        else if (itemMaterial.equals(Material.POWERED_RAIL)) {
+                        else if (itemMaterial.equals(ArtifactRequirements.validZoomiesMaterials[2])) {
                             if (5 > speedLevel) {
                                 speedLevel = 5;
                             }

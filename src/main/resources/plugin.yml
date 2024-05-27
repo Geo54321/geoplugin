@@ -163,6 +163,9 @@ permissions:
   GeoPlugin.commands.geoinfo.staff:
     description: Allows access to the staff version of geoinfo
     default: op
+  GeoPlugin.commands.geoartifact.staff:
+    description: Allows access to the staff version of geoartifact
+    default: op
   GeoPlugin.notes.*:
     description: Allows all parts of the notes module
     default: op
@@ -187,6 +190,7 @@ permissions:
       GeoPlugin.mechanics.speed.giga: true
       GeoPlugin.mechanics.speed.strong: true
       GeoPlugin.mechanics.speed.weak: true
+      GeoPlugin.commands.geoartifact.*: true
   GeoPlugin.chat.*:
     description: Allows use of all parts of the mechanics module
     default: op
