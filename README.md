@@ -122,6 +122,9 @@ Display information about this plugin and it's features in chat. Without a topic
         - GeoPlugin.mechanics.magnet.strong -- Allows usage of strong magnets
         - GeoPlugin.mechanics.harvest -- Allows usage of the right click harvest
         - GeoPlugin.mechanics.grow -- Allows usage of the extra bonemeal growth
+        - GeoPlugin.mechanics.speed.giga -- Allows usage of giga speed items
+        - GeoPlugin.mechanics.speed.strong -- Allows usage of strong speed items
+        - GeoPlugin.mechanics.speed.weak -- Allows usage of weak speed items
     - GeoPlugin.chat.*
         - GeoPlugin.commands.heart -- Allows usage of /heart
         - GeoPlugin.commands.rng -- Allows usage of /rng

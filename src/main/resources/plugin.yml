@@ -87,6 +87,13 @@ commands:
       [ginfo, geohelp, ghelp]
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /geoinfo (topic)"
+  geoartifact:
+    description: Used to create GeoArtifacts
+    permissions: GeoPlugin.commands.geoartifact
+    aliases:
+      [gartifact, geoitem, gitem]
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /geoartifact (type)"
 permissions:
   GeoPlugin.commands.gnote.remove:
     description: Allows removing notes
@@ -132,6 +139,15 @@ permissions:
   GeoPlugin.mechanics.magnet.weak:
     description: Allows usage of weak magnets
     default: op
+  GeoPlugin.mechanics.speed.weak:
+    description: Allows usage of speed 1 trinkets
+    default: op
+  GeoPlugin.mechanics.speed.strong:
+    description: Allows usage of speed 2 trinkets
+    default: op
+  GeoPlugin.mechanics.speed.giga:
+    description: Allows usage of speed 5 trinkets
+    default: op
   GeoPlugin.mechanics.harvest:
     description: Allows usage of right click harvest
     default: op
@@ -168,6 +184,9 @@ permissions:
       GeoPlugin.mechanics.magnet.weak: true
       GeoPlugin.mechanics.harvest: true
       GeoPlugin.mechanics.grow: true
+      GeoPlugin.mechanics.speed.giga: true
+      GeoPlugin.mechanics.speed.strong: true
+      GeoPlugin.mechanics.speed.weak: true
   GeoPlugin.chat.*:
     description: Allows use of all parts of the mechanics module
     default: op

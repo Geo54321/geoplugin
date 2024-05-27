@@ -24,8 +24,10 @@ import com.geoderp.geoplugin.Listeners.Harvest;
 import com.geoderp.geoplugin.Listeners.JankStep;
 import com.geoderp.geoplugin.Listeners.LoginNote;
 import com.geoderp.geoplugin.Listeners.Magnet;
+import com.geoderp.geoplugin.Listeners.PissCreepers;
 import com.geoderp.geoplugin.Listeners.Teleport;
 import com.geoderp.geoplugin.Listeners.XPKeeperIntercept;
+import com.geoderp.geoplugin.Listeners.Zoomies;
 import com.geoderp.geoplugin.Utility.NotesDatabase;
 import com.geoderp.geoplugin.Utility.XPDatabase;
 
@@ -87,6 +89,7 @@ public class Main extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new Magnet(this), this);
             getServer().getPluginManager().registerEvents(new Harvest(), this);
             getServer().getPluginManager().registerEvents(new ExtraGrow(this), this);
+            getServer().getPluginManager().registerEvents(new Zoomies(), this);
         }
 
         // Chat Module
@@ -103,6 +106,7 @@ public class Main extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new Teleport(), this);
             getServer().getPluginManager().registerEvents(new JankStep(), this);
             this.getCommand("explode").setExecutor(new Explode());
+            getServer().getPluginManager().registerEvents(new PissCreepers(), this);
         }
 
         // Enchantment Module
