@@ -44,26 +44,27 @@ public class Zoomies implements Listener {
 
         for (ItemStack item : p.getInventory()) {
             // Other potential items - sugar, rabbit foot, 
-            
-            if (item.hasItemMeta()) {
-                ItemMeta itemMeta = item.getItemMeta();
-                Material itemMaterial = item.getType();
-                
-                if (itemMeta.hasLore()) {
-                    if (itemMeta.getLore().equals(ArtifactRequirements.zoomiesLore)) {
-                        if (itemMaterial.equals(ArtifactRequirements.validZoomiesMaterials[0])) {
-                            if (1 > speedLevel) {
-                                speedLevel = 1;
+            if (item != null) {
+                if (item.hasItemMeta()) {
+                    ItemMeta itemMeta = item.getItemMeta();
+                    Material itemMaterial = item.getType();
+                    
+                    if (itemMeta.hasLore()) {
+                        if (itemMeta.getLore().equals(ArtifactRequirements.zoomiesLore)) {
+                            if (itemMaterial.equals(ArtifactRequirements.validZoomiesMaterials[0])) {
+                                if (1 > speedLevel) {
+                                    speedLevel = 1;
+                                }
                             }
-                        }
-                        else if (itemMaterial.equals(ArtifactRequirements.validZoomiesMaterials[1])) {
-                            if (2 > speedLevel) {
-                                speedLevel = 2;
+                            else if (itemMaterial.equals(ArtifactRequirements.validZoomiesMaterials[1])) {
+                                if (2 > speedLevel) {
+                                    speedLevel = 2;
+                                }
                             }
-                        }
-                        else if (itemMaterial.equals(ArtifactRequirements.validZoomiesMaterials[2])) {
-                            if (5 > speedLevel) {
-                                speedLevel = 5;
+                            else if (itemMaterial.equals(ArtifactRequirements.validZoomiesMaterials[2])) {
+                                if (5 > speedLevel) {
+                                    speedLevel = 5;
+                                }
                             }
                         }
                     }

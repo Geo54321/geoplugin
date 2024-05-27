@@ -101,9 +101,11 @@ public class GeoArtifact implements CommandExecutor, TabCompleter {
         }
         Player target = Bukkit.getPlayer(name);
 
-        if (target.getInventory().firstEmpty() == -1) {
-            sender.sendMessage("");
-        }
+        // check perms for type
+        // check if perms for spawning on other target
+        // check inventory space
+        // create the actual item
+
 
         switch (artifactType) {
             case "magnet":

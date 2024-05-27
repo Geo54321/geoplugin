@@ -297,6 +297,9 @@ public class NotesDatabase {
         player = player.trim();
         player = player.strip();
 
+        long oldTime = getPlaytime(player, "current");
+        time += oldTime;
+
         String sql = "UPDATE playtime SET current = ?, lastseen = ?" + "WHERE player = ?";
 
         try {
@@ -359,7 +362,7 @@ public class NotesDatabase {
     }
 
     public ArrayList<String[]> getTopTotal() {
-        String sql = "SELECT player, current, total FROM playtime ORDER BY current+total DESC LIMIT 5";
+        String sql = "SELECT player, current, previous FROM playtime ORDER BY current+previous DESC LIMIT 5";
 
         ArrayList<String[]> results = new ArrayList<String[]>();
 
@@ -370,7 +373,7 @@ public class NotesDatabase {
             while(rs.next()) {
                 String[] item = new String[2];
                 item[0] = rs.getString("player");
-                item[1] = String.valueOf(rs.getLong("current") + rs.getLong("total"));
+                item[1] = String.valueOf(rs.getLong("current") + rs.getLong("previous"));
                 results.add(item);
             }
         }
@@ -398,7 +401,7 @@ public class NotesDatabase {
     public void changeVersion() {
         ArrayList<long[]> results = new ArrayList<long[]>();
         
-        String sql = "SELECT player, current, previous from playtime";
+        String sql = "SELECT id, current, previous from playtime";
 
         try {
             PreparedStatement stmt = db.prepareStatement(sql);

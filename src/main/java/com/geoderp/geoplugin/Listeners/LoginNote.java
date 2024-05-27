@@ -84,11 +84,11 @@ public class LoginNote implements Listener {
     }
 
     public void sendGenericMessage(Player player, String message) {
-        if(player.equals(null)) {
-            Bukkit.getServer().getConsoleSender().sendMessage(message);
+        if(player != null) {
+            player.sendMessage(message);
         }
         else {
-            player.sendMessage(message);
+            Bukkit.getServer().getConsoleSender().sendMessage(message);
         }
     }
 

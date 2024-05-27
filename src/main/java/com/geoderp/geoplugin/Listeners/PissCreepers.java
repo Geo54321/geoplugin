@@ -16,16 +16,22 @@ public class PissCreepers implements Listener {
     public void onPlayerDeath(EntityExplodeEvent event) {
         // Creeper check
         if (event.getEntityType().equals(EntityType.CREEPER)) {
-            Location location = event.getLocation();
+            Location splashZone = event.getLocation();
+            splashZone.setY(splashZone.getY()+1);
+
+            Firework firework = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK);
+            FireworkMeta meta = firework.getFireworkMeta();
+            meta.clearEffects();
+            meta.setPower(1);
+            meta.addEffect(FireworkEffect.builder().withColor(Color.YELLOW).flicker(true).trail(true).with(Type.BURST).build());
+            firework.setFireworkMeta(meta);
 
             for (int g = 0; g < 5; g++) {
-                Firework main = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
-                FireworkMeta meta = main.getFireworkMeta();
-                meta.clearEffects();
-                meta.setPower(0);
-                meta.addEffect(FireworkEffect.builder().withColor(Color.YELLOW).flicker(true).trail(true).with(Type.BURST).build());
-                main.setFireworkMeta(meta);
+                Firework piss = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK);
+                piss.setFireworkMeta(meta);
+                piss.detonate();
             }
+            firework.detonate();
         }
     }
 }

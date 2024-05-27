@@ -25,6 +25,7 @@ import com.geoderp.geoplugin.Listeners.JankStep;
 import com.geoderp.geoplugin.Listeners.LoginNote;
 import com.geoderp.geoplugin.Listeners.Magnet;
 import com.geoderp.geoplugin.Listeners.PissCreepers;
+import com.geoderp.geoplugin.Listeners.PlaytimeTracker;
 import com.geoderp.geoplugin.Listeners.Teleport;
 import com.geoderp.geoplugin.Listeners.XPKeeperIntercept;
 import com.geoderp.geoplugin.Listeners.Zoomies;
@@ -66,6 +67,7 @@ public class Main extends JavaPlugin {
         // Playtime Module
         if (getConfig().getBoolean("modules.playtime")) {
             this.getCommand("playtime").setExecutor(new Playtime(notesDB));
+            getServer().getPluginManager().registerEvents(new PlaytimeTracker(notesDB, this), this);
             this.getCommand("advanceserverversion").setExecutor(new AdvanceVersion(notesDB,xpDB));
 
             // 5-minute scheduler to update playtime
@@ -74,7 +76,7 @@ public class Main extends JavaPlugin {
                 public void run() {
                     updateAllPlaytimes();
                 }
-            }.runTaskTimer(this,0,6000);
+            }.runTaskTimer(this,0,60);
         }
 
         // XP Storage Module
@@ -104,8 +106,8 @@ public class Main extends JavaPlugin {
         // Jank Module
         if (getConfig().getBoolean("modules.jank")) {
             getServer().getPluginManager().registerEvents(new Teleport(), this);
-            getServer().getPluginManager().registerEvents(new JankStep(), this);
             this.getCommand("explode").setExecutor(new Explode());
+            getServer().getPluginManager().registerEvents(new JankStep(), this);
             getServer().getPluginManager().registerEvents(new PissCreepers(), this);
         }
 
