@@ -27,6 +27,7 @@ import com.geoderp.geoplugin.Listeners.LoginNote;
 import com.geoderp.geoplugin.Listeners.Magnet;
 import com.geoderp.geoplugin.Listeners.PissCreepers;
 import com.geoderp.geoplugin.Listeners.PlaytimeTracker;
+import com.geoderp.geoplugin.Listeners.Scythe;
 import com.geoderp.geoplugin.Listeners.Teleport;
 import com.geoderp.geoplugin.Listeners.XPKeeperIntercept;
 import com.geoderp.geoplugin.Listeners.Zoomies;
@@ -91,7 +92,7 @@ public class Main extends JavaPlugin {
         if (getConfig().getBoolean("modules.mechanics")) {
             getServer().getPluginManager().registerEvents(new Harvest(), this);
             getServer().getPluginManager().registerEvents(new ExtraGrow(this), this);
-            getServer().getPluginManager().registerEvents(new Zoomies(), this);
+            getServer().getPluginManager().registerEvents(new Scythe(), this);
         }
 
         // Artifacts Module

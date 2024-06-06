@@ -91,7 +91,7 @@ commands:
     description: Used to create GeoArtifacts
     permissions: GeoPlugin.commands.geoartifact
     aliases:
-      [gartifact, geoitem, gitem]
+      [gartifact, geotrinket, gtrinket]
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /geoartifact (type)"
 permissions:
@@ -135,6 +135,9 @@ permissions:
     default: op
   GeoPlugin.mechanics.grow:
     description: Allows usage of the extra bonemeal growth
+    default: op
+  GeoPlugin.mechanics.scythe:
+    description: Allows usage of the shear scythes
     default: op
   GeoPlugin.jank.mountTeleport:
     description: Allows usage of teleporting mounts
@@ -193,6 +196,7 @@ permissions:
     children:
       GeoPlugin.mechanics.harvest: true
       GeoPlugin.mechanics.grow: true
+      GeoPlugin.mechanics.scythe: true
   GeoPlugin.chat.*:
     description: Allows use of all parts of the mechanics module
     default: op
