@@ -10,6 +10,7 @@ import com.geoderp.geoplugin.Commands.AdvanceVersion;
 import com.geoderp.geoplugin.Commands.BlameGeo;
 import com.geoderp.geoplugin.Commands.Explode;
 import com.geoderp.geoplugin.Commands.GNote;
+import com.geoderp.geoplugin.Commands.GeoArtifact;
 import com.geoderp.geoplugin.Commands.GeoInfo;
 import com.geoderp.geoplugin.Commands.GeoKeeper;
 import com.geoderp.geoplugin.Commands.GeoPlugin;
@@ -88,9 +89,15 @@ public class Main extends JavaPlugin {
 
         // Mechanics Module
         if (getConfig().getBoolean("modules.mechanics")) {
-            getServer().getPluginManager().registerEvents(new Magnet(this), this);
             getServer().getPluginManager().registerEvents(new Harvest(), this);
             getServer().getPluginManager().registerEvents(new ExtraGrow(this), this);
+            getServer().getPluginManager().registerEvents(new Zoomies(), this);
+        }
+
+        // Artifacts Module
+        if (getConfig().getBoolean("modules.artifacts")) {
+            this.getCommand("geoartifact").setExecutor(new GeoArtifact());
+            getServer().getPluginManager().registerEvents(new Magnet(this), this);
             getServer().getPluginManager().registerEvents(new Zoomies(), this);
         }
 
@@ -119,8 +126,6 @@ public class Main extends JavaPlugin {
         // }
 
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
-
-        
     }
     
     @Override
@@ -142,6 +147,7 @@ public class Main extends JavaPlugin {
         config.addDefault("modules.playtime", true);
         config.addDefault("modules.xp-storage", true);
         config.addDefault("modules.mechanics", true);
+        config.addDefault("modules.artifacts", true);
         config.addDefault("modules.chat-commands", true);
         config.addDefault("modules.jank", true);
         config.addDefault("modules.enchantments", true);

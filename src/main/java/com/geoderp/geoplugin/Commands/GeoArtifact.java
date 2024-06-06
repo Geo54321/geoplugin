@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,12 +28,17 @@ public class GeoArtifact implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage("§2Types of GeoArtifacts Currently Available: §amagnet, zoomies");
+            sender.sendMessage("§2Types of GeoArtifacts Currently Available: §a" + validArtifacts.toString());
         }
         else if (args.length == 1) {
             if (sender instanceof Player) {
                 if (isValidArtifact(args[0])) {
-                    createArtifact(sender, args, false);
+                    if (hasPerms(sender, args[0])) {
+                        createArtifact(sender, args, false);
+                    }
+                    else {
+                        sender.sendMessage("§cSorry you do not have permissions to create this type of artifact.");
+                    }
                 }
             }
             else {
@@ -41,7 +47,18 @@ public class GeoArtifact implements CommandExecutor, TabCompleter {
         }
         else if (args.length == 2) {
             if (isValidArtifact(args[0]) && isValidTarget(args[1])) {
-                createArtifact(sender, args, true);
+                if (sender.hasPermission("GeoPlugin.geoartifact.staff")) {
+                    if (hasPerms(sender, args[0])) {
+                        createArtifact(sender, args, true);
+                    }
+                    else {
+                        sender.sendMessage("§cSorry you do not have permissions to create this type of artifact.");
+                    }
+                }
+                else {
+                    sender.sendMessage("§cYou don't have permissions to spawn GeoArtifacts on other players. Using your inventory instead.");
+                    createArtifact(sender, args, false);
+                }
             }
         }
         else {
@@ -90,29 +107,89 @@ public class GeoArtifact implements CommandExecutor, TabCompleter {
         return false;
     }
 
+    public boolean hasPerms(CommandSender sender, String type) {
+        switch (type) {
+            case "magnet":
+                if (sender.hasPermission("GeoPlugin.geoartifact.magnet.strong") || sender.hasPermission("GeoPlugin.geoartifact.magnet.weak")) {
+                    return true;
+                }
+                break;
+            case "zoomies":
+                if (sender.hasPermission("GeoPlugin.geoartifact.zoomies.weak") || sender.hasPermission("GeoPlugin.geoartifact.zoomies.strong") || sender.hasPermission("GeoPlugin.geoartifact.zoomies.giga")) {
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
+
+    public boolean hasSpace(Player player) {
+        if (player.getInventory().firstEmpty() == -1) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidMaterial(ItemStack input, String type) {
+        Material item = input.getType();
+        if (type.equals("magnet")) {
+            for (Material mat : ArtifactRequirements.validStrongMagnetMaterials) {
+                if (mat.equals(item)) {
+                    return true;
+                }
+            }
+            for (Material mat : ArtifactRequirements.validWeakMagnetMaterials) {
+                if (mat.equals(item)) {
+                    return true;
+                }
+            }
+        }
+        else if (type.equals("zoomies")) {
+            for (Material mat : ArtifactRequirements.validZoomiesMaterials) {
+                if (mat.equals(item)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void createArtifact(CommandSender sender, String[] args, Boolean other) {
         String artifactType = args[0];
-        String name;
+        Player target;
         if (other) {
-            name = args[1];
+            target = Bukkit.getPlayer(args[1]);
         }
         else {
-            name = sender.getName();
+            target = (Player) sender;
         }
-        Player target = Bukkit.getPlayer(name);
-
-        // check perms for type
-        // check if perms for spawning on other target
-        // check inventory space
-        // create the actual item
-
 
         switch (artifactType) {
             case "magnet":
-
+                if (other) {
+                    if (hasSpace(target)) {
+                        spawnMagnet(target, "strong");
+                    }
+                }
+                else {
+                    ItemStack offhand = target.getInventory().getItemInOffHand();
+                    if (isValidMaterial(offhand, artifactType)) {
+                        makeMagnet(offhand);
+                    }
+                }
                 break;
             case "zoomies":
-                
+                if (other) {
+                    if (hasSpace(target)) {
+                        spawnZoomies(target, "giga");
+                    }
+                }
+                else {
+                    ItemStack offhand = target.getInventory().getItemInOffHand();
+                    if (isValidMaterial(offhand, artifactType)) {
+                        makeZoomies(offhand);
+                    }
+                }
                 break;
         }
     }
@@ -143,5 +220,36 @@ public class GeoArtifact implements CommandExecutor, TabCompleter {
         magnet.setItemMeta(magnetMeta);
 
         return magnet;
+    }
+
+    public void spawnZoomies(Player player, String strength) {
+        ItemStack zoomies;
+        if (strength.equals("giga")) {
+            zoomies = new ItemStack(ArtifactRequirements.validStrongMagnetMaterials[2]);
+        }
+        else if (strength.equals("strong")) {
+            zoomies = new ItemStack(ArtifactRequirements.validStrongMagnetMaterials[1]);
+        }
+        else {
+            zoomies = new ItemStack(ArtifactRequirements.validWeakMagnetMaterials[0]);
+        }
+        
+        zoomies.setAmount(1);
+
+        zoomies = makeZoomies(zoomies);
+        
+        player.getInventory().addItem(zoomies);
+    }
+
+    public ItemStack makeZoomies(ItemStack zoomies) {
+        ItemMeta zoomiesMeta = zoomies.getItemMeta();
+
+        zoomiesMeta.setDisplayName(ArtifactRequirements.zoomiesName);
+        zoomiesMeta.setLore(ArtifactRequirements.zoomiesLore);
+
+        zoomies.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+        zoomies.setItemMeta(zoomiesMeta);
+
+        return zoomies;
     }
 }

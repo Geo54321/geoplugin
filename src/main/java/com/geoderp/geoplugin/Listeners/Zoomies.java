@@ -27,13 +27,13 @@ public class Zoomies implements Listener {
     }
 
     public int getPermissionLevel(Player p) {
-        if (p.hasPermission("GeoPlugin.mechanics.speed.giga")) {
+        if (p.hasPermission("GeoPlugin.geoartifact.zoomies.weak")) {
             return 5;
         }
-        else if (p.hasPermission("GeoPlugin.mechanics.speed.strong")) {
+        else if (p.hasPermission("GeoPlugin.geoartifact.zoomies.strong")) {
             return 2;
         }
-        else if (p.hasPermission("GeoPlugin.mechanics.speed.weak")) {
+        else if (p.hasPermission("GeoPlugin.geoartifact.zoomies.giga")) {
             return 1;
         }
         return 0;

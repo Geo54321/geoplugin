@@ -127,26 +127,8 @@ permissions:
   GeoPlugin.geokeeper.death.low:
     description: Allows small partial storage of XP on death
     default: op
-  GeoPlugin.commands.geoplugin.magnet:
-    description: Allows use /geoplugin to spawn a magnet
-    default: op
   GeoPlugin.commands.geoplugin.reload:
     description: Reloads the config file
-    default: op
-  GeoPlugin.mechanics.magnet.strong:
-    description: Allows usage of strong magnets
-    default: op
-  GeoPlugin.mechanics.magnet.weak:
-    description: Allows usage of weak magnets
-    default: op
-  GeoPlugin.mechanics.speed.weak:
-    description: Allows usage of speed 1 trinkets
-    default: op
-  GeoPlugin.mechanics.speed.strong:
-    description: Allows usage of speed 2 trinkets
-    default: op
-  GeoPlugin.mechanics.speed.giga:
-    description: Allows usage of speed 5 trinkets
     default: op
   GeoPlugin.mechanics.harvest:
     description: Allows usage of right click harvest
@@ -163,8 +145,23 @@ permissions:
   GeoPlugin.commands.geoinfo.staff:
     description: Allows access to the staff version of geoinfo
     default: op
-  GeoPlugin.commands.geoartifact.staff:
+  GeoPlugin.geoartifact.staff:
     description: Allows access to the staff version of geoartifact
+    default: op
+  GeoPlugin.geoartifact.magnet.strong:
+    description: Allows usage of strong magnets
+    default: op
+  GeoPlugin.geoartifact.magnet.weak:
+    description: Allows usage of weak magnets
+    default: op
+  GeoPlugin.geoartifact.zoomies.weak:
+    description: Allows usage of speed 1 trinkets
+    default: op
+  GeoPlugin.geoartifact.zoomies.strong:
+    description: Allows usage of speed 2 trinkets
+    default: op
+  GeoPlugin.geoartifact.zoomies.giga:
+    description: Allows usage of speed 5 trinkets
     default: op
   GeoPlugin.notes.*:
     description: Allows all parts of the notes module
@@ -179,18 +176,23 @@ permissions:
       GeoPlugin.commands.geokeeper: true
       GeoPlugin.commands.geokeeper.others: true
       GeoPlugin.geokeeper.death.high: true
+  GeoPlugin.geoartifact.*:
+    description: Allows use of all GeoArtifacts
+    default: op
+    children:
+      GeoPlugin.commands.geoartifact: true
+      GeoPlugin.geoartifact.magnet.strong: true
+      GeoPlugin.geoartifact.magnet.weak: true
+      GeoPlugin.geoartifact.zoomies.weak: true
+      GeoPlugin.geoartifact.zoomies.strong: true
+      GeoPlugin.geoartifact.zoomies.giga: true
+      GeoPlugin.geoartifact.staff: true
   GeoPlugin.mechanics.*:
     description: Allows use of all parts of the mechanics module
     default: op
     children:
-      GeoPlugin.mechanics.magnet.strong: true
-      GeoPlugin.mechanics.magnet.weak: true
       GeoPlugin.mechanics.harvest: true
       GeoPlugin.mechanics.grow: true
-      GeoPlugin.mechanics.speed.giga: true
-      GeoPlugin.mechanics.speed.strong: true
-      GeoPlugin.mechanics.speed.weak: true
-      GeoPlugin.commands.geoartifact.*: true
   GeoPlugin.chat.*:
     description: Allows use of all parts of the mechanics module
     default: op
@@ -214,13 +216,13 @@ permissions:
     children:
       GeoPlugin.commands.geoplugin: true
       GeoPlugin.commands.geoplugin.reload: true
-      GeoPlugin.commands.geoplugin.magnet: true
   GeoPlugin.*:
     description: Wildcard permission
     default: op
     children:
       GeoPlugin.notes.*: true
       GeoPlugin.geokeeper.*: true
+      GeoPlugin.geoartifact.*: true
       GeoPlugin.mechanics.*: true
       GeoPlugin.geoplugin.*: true
       GeoPlugin.chat.*: true

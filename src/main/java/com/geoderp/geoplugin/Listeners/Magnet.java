@@ -44,14 +44,14 @@ public class Magnet implements Listener {
     }
 
     public void doMagnet(Player player) {
-        if (player.hasPermission("GeoPlugin.mechanics.magnet.strong") && isValidMagnet(player).equals("strong")){
+        if (player.hasPermission("GeoPlugin.geoartifact.magnet.strong") && isValidMagnet(player).equals("strong")){
             for(Entity entity : player.getNearbyEntities(strongRange, strongRange/2, strongRange)) {
                 if(entity instanceof Item || entity instanceof ExperienceOrb) {
                     entity.teleport(player);
                 }
             }
         }
-        else if (player.hasPermission("GeoPlugin.mechanics.magnet.weak") && isValidMagnet(player).equals("weak")) {
+        else if (player.hasPermission("GeoPlugin.geoartifact.magnet.weak") && isValidMagnet(player).equals("weak")) {
             for(Entity entity : player.getNearbyEntities(weakRange, weakRange, weakRange)) {
                 if(entity instanceof Item || entity instanceof ExperienceOrb) {
                     entity.teleport(player);
