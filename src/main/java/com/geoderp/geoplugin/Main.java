@@ -162,7 +162,7 @@ public class Main extends JavaPlugin {
         config.addDefault("options.weak-magnet-range", 2);
         config.addDefault("options.sneak-disable-magnet", true);
         config.addDefault("options.growth-chance-percent",0.3);
-        config.addDefault("options.scythe-range",2);
+        config.addDefault("options.scythe-range",4);
         config.addDefault("options.hewing-max-block-break", 50);
 
         config.options().copyDefaults(true);

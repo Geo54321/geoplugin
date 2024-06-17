@@ -225,13 +225,13 @@ public class GeoArtifact implements CommandExecutor, TabCompleter {
     public void spawnZoomies(Player player, String strength) {
         ItemStack zoomies;
         if (strength.equals("giga")) {
-            zoomies = new ItemStack(ArtifactRequirements.validStrongMagnetMaterials[2]);
+            zoomies = new ItemStack(ArtifactRequirements.validZoomiesMaterials[2]);
         }
         else if (strength.equals("strong")) {
-            zoomies = new ItemStack(ArtifactRequirements.validStrongMagnetMaterials[1]);
+            zoomies = new ItemStack(ArtifactRequirements.validZoomiesMaterials[1]);
         }
         else {
-            zoomies = new ItemStack(ArtifactRequirements.validWeakMagnetMaterials[0]);
+            zoomies = new ItemStack(ArtifactRequirements.validZoomiesMaterials[0]);
         }
         
         zoomies.setAmount(1);
