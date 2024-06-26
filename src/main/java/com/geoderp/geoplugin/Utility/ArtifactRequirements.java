@@ -20,6 +20,7 @@ public class ArtifactRequirements {
     }
 
     // Zoomies 
+    // Other potential items - sugar, rabbit foot, 
     public static Material[] validZoomiesMaterials = {Material.FEATHER, Material.BLAZE_POWDER, Material.POWERED_RAIL};
     public static String zoomiesName = "§dGeoZoomies";
     public static String zoomiesLoreString = "§5GeoZoomies";

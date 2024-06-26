@@ -11,8 +11,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Scythe implements Listener {
@@ -27,7 +25,7 @@ public class Scythe implements Listener {
         Player player = event.getPlayer();
         if(player.hasPermission("GeoPlugin.mechanics.scythe")) {
             if (event.getClickedBlock() != null) {
-                if (event.getClickedBlock().getType().equals(Material.GRASS) || event.getClickedBlock().getType().equals(Material.TALL_GRASS) || event.getClickedBlock().getType().equals(Material.FERN) || event.getClickedBlock().getType().equals(Material.LARGE_FERN)) {
+                if (event.getClickedBlock().getType().equals(Material.SHORT_GRASS) || event.getClickedBlock().getType().equals(Material.TALL_GRASS) || event.getClickedBlock().getType().equals(Material.FERN) || event.getClickedBlock().getType().equals(Material.LARGE_FERN)) {
                     if (player.getInventory().getItemInMainHand().getType().equals(Material.SHEARS) || player.getInventory().getItemInOffHand().getType().equals(Material.SHEARS)) {
                         killGrass(event.getClickedBlock().getLocation());
                     }
@@ -46,7 +44,7 @@ public class Scythe implements Listener {
                     if(target.getType().equals(Material.TALL_GRASS) || target.getType().equals(Material.LARGE_FERN)) {
                         removeTarget(target);
                         origin.getWorld().getBlockAt(origin.getBlockX(), origin.getBlockY()+1, origin.getBlockZ()).setType(Material.AIR);
-                    } else if(target.getType().equals(Material.GRASS) || target.getType().equals(Material.FERN)) {
+                    } else if(target.getType().equals(Material.SHORT_GRASS) || target.getType().equals(Material.FERN)) {
                         removeTarget(target);
                     }
                 }

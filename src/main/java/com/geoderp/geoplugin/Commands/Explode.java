@@ -21,7 +21,7 @@ public class Explode implements CommandExecutor {
                 Location splashZone = player.getLocation();
                 splashZone.setY(splashZone.getY()+1);
     
-                Firework main = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK);
+                Firework main = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK_ROCKET);
                 FireworkMeta meta = main.getFireworkMeta();
                 meta.clearEffects();
                 meta.setPower(1);
@@ -31,7 +31,7 @@ public class Explode implements CommandExecutor {
                 player.setHealth(2);
     
                 for (int g = 0; g < 100; g++) {
-                    Firework death = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK);
+                    Firework death = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK_ROCKET);
                     death.setFireworkMeta(meta);
                     death.detonate();
                 }

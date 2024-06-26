@@ -19,7 +19,7 @@ public class PissCreepers implements Listener {
             Location splashZone = event.getLocation();
             splashZone.setY(splashZone.getY()+1);
 
-            Firework firework = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK);
+            Firework firework = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK_ROCKET);
             FireworkMeta meta = firework.getFireworkMeta();
             meta.clearEffects();
             meta.setPower(1);
@@ -27,7 +27,7 @@ public class PissCreepers implements Listener {
             firework.setFireworkMeta(meta);
 
             for (int g = 0; g < 5; g++) {
-                Firework piss = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK);
+                Firework piss = (Firework) splashZone.getWorld().spawnEntity(splashZone, EntityType.FIREWORK_ROCKET);
                 piss.setFireworkMeta(meta);
                 piss.detonate();
             }

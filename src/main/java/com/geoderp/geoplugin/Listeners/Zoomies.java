@@ -43,7 +43,6 @@ public class Zoomies implements Listener {
         int speedLevel = 0;
 
         for (ItemStack item : p.getInventory()) {
-            // Other potential items - sugar, rabbit foot, 
             if (item != null) {
                 if (item.hasItemMeta()) {
                     ItemMeta itemMeta = item.getItemMeta();

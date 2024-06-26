@@ -119,7 +119,7 @@ public class Promotion implements CommandExecutor, TabCompleter {
 
     public void fireworks(String rank, Player player) {
         Location target = player.getLocation();
-        Firework main = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK);
+        Firework main = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK_ROCKET);
         FireworkMeta meta = main.getFireworkMeta();
         meta.clearEffects();
         meta.setPower(1);
@@ -156,14 +156,14 @@ public class Promotion implements CommandExecutor, TabCompleter {
         main.setFireworkMeta(meta);
 
         target.setX(target.getX()+2);
-        Firework left = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK);
+        Firework left = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK_ROCKET);
         target.setX(target.getX()-4);
-        Firework right = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK);
+        Firework right = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK_ROCKET);
         target.setX(target.getX()+2);
         target.setZ(target.getZ()+2);
-        Firework forward = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK);
+        Firework forward = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK_ROCKET);
         target.setZ(target.getZ()-4);
-        Firework backward = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK);
+        Firework backward = (Firework) target.getWorld().spawnEntity(target, EntityType.FIREWORK_ROCKET);
 
         left.setFireworkMeta(meta);
         right.setFireworkMeta(meta);
