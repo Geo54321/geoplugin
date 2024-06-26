@@ -119,13 +119,6 @@ public class Main extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new PissCreepers(), this);
         }
 
-        // Enchantment Module
-        // if (getConfig().getBoolean("modules.enchantments")) {
-        //     GeoEnchants.registerAll();
-        //     getServer().getPluginManager().registerEvents(new HewingOld(this), this);
-        //     this.getCommand("please").setExecutor(new Please());
-        // }
-
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
     }
     
