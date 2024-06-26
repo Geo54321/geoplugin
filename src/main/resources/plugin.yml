@@ -1,6 +1,6 @@
 main: com.geoderp.geoplugin.Main
 name: GeoPlugin
-version: 2.4.1
+version: 4.21.1
 author: GeoDerp
 api-version: 1.21
 description: Add player notes, XP storage, and much more!
@@ -27,27 +27,6 @@ commands:
       [geoxp, gxp, gkeeper]
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /geokeeper store [all/# of levels] or /geokeeper retreive [all/# of levels]"
-  heart:
-    description: Used for showing love to other players
-    permissions: GeoPlugin.commands.heart
-    aliases:
-      love
-    permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage: /heart (name)"
-  rng:
-    description: Used for generating random numbers
-    permissions: GeoPlugin.commands.rng
-    aliases:
-      dice
-    permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage: /rng [range max] (# of results)"
-  blamegeo:
-    description: Used for assigning blame
-    permissions: GeoPlugin.commands.blamegeo
-    aliases:
-      [blame, geo]
-    permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage: /blamegeo"
   promotion:
     description: Used to annouce a player's promotion
     permissions: GeoPlugin.commands.promotion
@@ -55,20 +34,6 @@ commands:
       [congrats, promo]
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: "Usage: /promotion [username] [rank]"
-  poggers:
-    descriptions: Used to pog
-    permissions: GeoPlugin.commands.poggers
-    aliases:
-      pog
-    permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage: /poggers (username)"
-  explode:
-    description: Used to explode yourself. Violently.
-    permissions: GeoPlugin.commands.explode
-    aliases: 
-      selfdestruct
-    permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage: /explode"
   playtime:
     description: Used to display the playtime of yourself or others
     permissions: GeoPlugin.commands.playtime
@@ -80,20 +45,6 @@ commands:
     description: Used to "advance" the game version or the server. Moves current playtime to previous and drops the current xp table.
     permission-message: I need to you to stop. That...command... it's making people nervous.
     usage: /advanceserverversion
-  geoinfo:
-    description: Used to display info about commands ingame
-    permissions: GeoPlugin.commands.geoinfo
-    aliases:
-      [ginfo, geohelp, ghelp]
-    permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage: /geoinfo (topic)"
-  geoartifact:
-    description: Used to create GeoArtifacts
-    permissions: GeoPlugin.commands.geoartifact
-    aliases:
-      [gartifact, geotrinket, gtrinket]
-    permission-message: I need to you to stop. That...command... it's making people nervous.
-    usage: "Usage: /geoartifact (type)"
 permissions:
   GeoPlugin.commands.gnote.remove:
     description: Allows removing notes
@@ -111,60 +62,12 @@ permissions:
       GeoPlugin.commands.gnote: true
       GeoPlugin.notes.loginNote: true
       GeoPlugin.notes.loginPlaytime: true
-      GeoPPlugin.commands.geoinfo.staff: true
+      GeoPlugin.commands.promotions: true
   GeoPlugin.commands.geokeeper.others:
     description: Allows usage of other players geokeepers
     default: op
-  GeoPlugin.commands.poggers.others:
-    description: Allow usage of poggers on others
-    default: op
-  GeoPlugin.geokeeper.death.high:
-    description: Allows partial/full storage of XP on death
-    default: op
-  GeoPlugin.geokeeper.death.medium:
-    description: Allows partial storage of XP on death
-    default: op
-  GeoPlugin.geokeeper.death.low:
-    description: Allows small partial storage of XP on death
-    default: op
   GeoPlugin.commands.geoplugin.reload:
     description: Reloads the config file
-    default: op
-  GeoPlugin.mechanics.harvest:
-    description: Allows usage of right click harvest
-    default: op
-  GeoPlugin.mechanics.grow:
-    description: Allows usage of the extra bonemeal growth
-    default: op
-  GeoPlugin.mechanics.scythe:
-    description: Allows usage of the shear scythes
-    default: op
-  GeoPlugin.jank.mountTeleport:
-    description: Allows usage of teleporting mounts
-    default: op
-  GeoPlugin.jank.jankStep:
-    description: Jank as fuck step assist
-    default: op
-  GeoPlugin.commands.geoinfo.staff:
-    description: Allows access to the staff version of geoinfo
-    default: op
-  GeoPlugin.geoartifact.staff:
-    description: Allows access to the staff version of geoartifact
-    default: op
-  GeoPlugin.geoartifact.magnet.strong:
-    description: Allows usage of strong magnets
-    default: op
-  GeoPlugin.geoartifact.magnet.weak:
-    description: Allows usage of weak magnets
-    default: op
-  GeoPlugin.geoartifact.zoomies.weak:
-    description: Allows usage of speed 1 trinkets
-    default: op
-  GeoPlugin.geoartifact.zoomies.strong:
-    description: Allows usage of speed 2 trinkets
-    default: op
-  GeoPlugin.geoartifact.zoomies.giga:
-    description: Allows usage of speed 5 trinkets
     default: op
   GeoPlugin.notes.*:
     description: Allows all parts of the notes module
@@ -179,41 +82,6 @@ permissions:
       GeoPlugin.commands.geokeeper: true
       GeoPlugin.commands.geokeeper.others: true
       GeoPlugin.geokeeper.death.high: true
-  GeoPlugin.geoartifact.*:
-    description: Allows use of all GeoArtifacts
-    default: op
-    children:
-      GeoPlugin.commands.geoartifact: true
-      GeoPlugin.geoartifact.magnet.strong: true
-      GeoPlugin.geoartifact.magnet.weak: true
-      GeoPlugin.geoartifact.zoomies.weak: true
-      GeoPlugin.geoartifact.zoomies.strong: true
-      GeoPlugin.geoartifact.zoomies.giga: true
-      GeoPlugin.geoartifact.staff: true
-  GeoPlugin.mechanics.*:
-    description: Allows use of all parts of the mechanics module
-    default: op
-    children:
-      GeoPlugin.mechanics.harvest: true
-      GeoPlugin.mechanics.grow: true
-      GeoPlugin.mechanics.scythe: true
-  GeoPlugin.chat.*:
-    description: Allows use of all parts of the mechanics module
-    default: op
-    children:
-      GeoPlugin.commands.heart: true
-      GeoPlugin.commands.rng: true
-      GeoPlugin.commands.blamegeo: true
-      GeoPlugin.commands.promotion: true
-      GeoPlugin.commands.poggers: true
-      GeoPlugin.commands.poggers.others: true
-  GeoPlugin.jank.*:
-    description: Allows usage of the jank bits of the plugin
-    default: op
-    children:
-      GeoPlugin.jank.mountTeleport: true
-      GeoPlugin.jank.jankStep: true
-      GeoPlugin.commands.explode: true
   GeoPlugin.geoplugin.*:
     description: Allows all of the geoplugin command
     default: op

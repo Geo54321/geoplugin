@@ -7,30 +7,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.geoderp.geoplugin.Commands.AdvanceVersion;
-import com.geoderp.geoplugin.Commands.BlameGeo;
-import com.geoderp.geoplugin.Commands.Explode;
 import com.geoderp.geoplugin.Commands.GNote;
-import com.geoderp.geoplugin.Commands.GeoArtifact;
 import com.geoderp.geoplugin.Commands.GeoInfo;
 import com.geoderp.geoplugin.Commands.GeoKeeper;
 import com.geoderp.geoplugin.Commands.GeoPlugin;
-import com.geoderp.geoplugin.Commands.Heart;
 import com.geoderp.geoplugin.Commands.Playtime;
-import com.geoderp.geoplugin.Commands.Poggers;
 import com.geoderp.geoplugin.Commands.Promotion;
-import com.geoderp.geoplugin.Commands.RNG;
 import com.geoderp.geoplugin.Listeners.DeathXP;
-import com.geoderp.geoplugin.Listeners.ExtraGrow;
-import com.geoderp.geoplugin.Listeners.Harvest;
-import com.geoderp.geoplugin.Listeners.JankStep;
 import com.geoderp.geoplugin.Listeners.LoginNote;
-import com.geoderp.geoplugin.Listeners.Magnet;
-import com.geoderp.geoplugin.Listeners.PissCreepers;
 import com.geoderp.geoplugin.Listeners.PlaytimeTracker;
-import com.geoderp.geoplugin.Listeners.Scythe;
-import com.geoderp.geoplugin.Listeners.Teleport;
 import com.geoderp.geoplugin.Listeners.XPKeeperIntercept;
-import com.geoderp.geoplugin.Listeners.Zoomies;
 import com.geoderp.geoplugin.Utility.NotesDatabase;
 import com.geoderp.geoplugin.Utility.XPDatabase;
 
@@ -58,7 +44,7 @@ public class Main extends JavaPlugin {
         xpDB = new XPDatabase(this, "GeoXPDB.db");
 
         // GeoInfo
-        this.getCommand("geoinfo").setExecutor(new GeoInfo(this));
+        //this.getCommand("geoinfo").setExecutor(new GeoInfo(this));
 
         // Notes Module
         if (getConfig().getBoolean("modules.notes")) {
@@ -88,35 +74,9 @@ public class Main extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new XPKeeperIntercept(), this);
         }
 
-        // Mechanics Module
-        if (getConfig().getBoolean("modules.mechanics")) {
-            getServer().getPluginManager().registerEvents(new Harvest(), this);
-            getServer().getPluginManager().registerEvents(new ExtraGrow(this), this);
-            getServer().getPluginManager().registerEvents(new Scythe(this), this);
-        }
-
-        // Artifacts Module
-        if (getConfig().getBoolean("modules.artifacts")) {
-            this.getCommand("geoartifact").setExecutor(new GeoArtifact());
-            getServer().getPluginManager().registerEvents(new Magnet(this), this);
-            getServer().getPluginManager().registerEvents(new Zoomies(), this);
-        }
-
         // Chat Module
         if (getConfig().getBoolean("modules.chat-commands")) {
-            this.getCommand("heart").setExecutor(new Heart());
-            this.getCommand("rng").setExecutor(new RNG());
-            this.getCommand("blamegeo").setExecutor(new BlameGeo());
             this.getCommand("promotion").setExecutor(new Promotion());
-            this.getCommand("poggers").setExecutor(new Poggers());
-        }
-
-        // Jank Module
-        if (getConfig().getBoolean("modules.jank")) {
-            getServer().getPluginManager().registerEvents(new Teleport(), this);
-            this.getCommand("explode").setExecutor(new Explode());
-            getServer().getPluginManager().registerEvents(new JankStep(), this);
-            getServer().getPluginManager().registerEvents(new PissCreepers(), this);
         }
 
         this.getCommand("geoplugin").setExecutor(new GeoPlugin(this));
@@ -140,23 +100,13 @@ public class Main extends JavaPlugin {
         config.addDefault("modules.notes", true);
         config.addDefault("modules.playtime", true);
         config.addDefault("modules.xp-storage", true);
-        config.addDefault("modules.mechanics", true);
-        config.addDefault("modules.artifacts", true);
         config.addDefault("modules.chat-commands", true);
-        config.addDefault("modules.jank", true);
-        config.addDefault("modules.enchantments", true);
         config.addDefault("options.login-notes", true);
         config.addDefault("options.login-playtime", true);
         config.addDefault("options.xp-store-on-death", true);
         config.addDefault("options.xp-death-percent-high", 1);
         config.addDefault("options.xp-death-percent-medium", 0.50);
         config.addDefault("options.xp-death-percent-low", 0.25);
-        config.addDefault("options.strong-magnet-range", 4);
-        config.addDefault("options.weak-magnet-range", 2);
-        config.addDefault("options.sneak-disable-magnet", true);
-        config.addDefault("options.growth-chance-percent",0.3);
-        config.addDefault("options.scythe-range",4);
-        config.addDefault("options.hewing-max-block-break", 50);
 
         config.options().copyDefaults(true);
         saveConfig();

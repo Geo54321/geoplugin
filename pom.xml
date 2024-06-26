@@ -6,15 +6,15 @@
 
   <groupId>com.geoderp.geoplugin</groupId>
   <artifactId>geoplugin</artifactId>
-  <version>2.4.1</version>
+  <version>3.21.1</version>
 
   <name>geoplugin</name>
   <url>https://github.com/Geo54321</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <repositories>
