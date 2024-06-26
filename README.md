@@ -47,9 +47,13 @@ Player XP is stored in a SQLite database found at [serverDir]/plugins/GeoPlugin/
 | /geokeeper retrieve all [playerName] | GeoPlugin.commands.geokeeper.others | Retrieve all stored XP of a given player to you |
 | /geokeeper retrieve [# of levels] [playerName] | GeoPlugin.commands.geokeeper.others | Retrieves a given number of levels of a given player to you |
 
+## GeoInfo
+Links to the MCNSA website for more details on plugin features. Usage: /geoinfo
+
 # All Permission Nodes as a Tree
 
 - GeoPlugin.*
+    - GeoPlugin.commands.geoinfo -- Allows use of /geoinfo
     - GeoPlugin.notes.*
         - GeoPlugin.notes.moderator
             - GeoPlugin.commands.gnote -- Allows use of /gnote

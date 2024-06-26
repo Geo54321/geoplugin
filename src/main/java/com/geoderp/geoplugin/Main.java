@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.geoderp.geoplugin.Commands.AdvanceVersion;
 import com.geoderp.geoplugin.Commands.GNote;
+import com.geoderp.geoplugin.Commands.GeoInfo;
 import com.geoderp.geoplugin.Commands.GeoKeeper;
 import com.geoderp.geoplugin.Commands.GeoPlugin;
 import com.geoderp.geoplugin.Commands.Playtime;
@@ -41,6 +42,9 @@ public class Main extends JavaPlugin {
         // Database setups
         notesDB = new NotesDatabase(this, "GeoDB.db");
         xpDB = new XPDatabase(this, "GeoXPDB.db");
+
+        // GeoInfo Command
+        this.getCommand("geoinfo").setExecutor(new GeoInfo());
 
         // Notes Module
         if (getConfig().getBoolean("modules.notes")) {

@@ -1,13 +1,16 @@
 main: com.geoderp.geoplugin.Main
 name: GeoPlugin
-version: 3.21.1
+version: 3.21.2
 author: GeoDerp
 api-version: 1.21
 description: Add player notes, XP storage, and much more!
 prefix: BlameGeo!
 commands:
-  please:
-    permissions: GeoPlugin.commands.please
+  geoinfo:
+    description: Links to the MCNSA website for more info on commands and features
+    permissions: GeoPlugin.commands.geoinfo
+    permission-message: I need to you to stop. That...command... it's making people nervous.
+    usage: "Usage: /geoinfo"
   gnote:
     description: Used for adding, viewing and removing player notes
     permissions: GeoPlugin.commands.gnote
@@ -92,6 +95,7 @@ permissions:
     description: Wildcard permission
     default: op
     children:
+      GeoPlugin.commands.geoinfo: true
       GeoPlugin.notes.*: true
       GeoPlugin.geokeeper.*: true
       GeoPlugin.geoartifact.*: true
