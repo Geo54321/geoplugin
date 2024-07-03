@@ -55,6 +55,7 @@ public class GNote implements CommandExecutor{
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public String getUUID(CommandSender sender, String name) {
         String uuid = "";
         try {
@@ -87,6 +88,7 @@ public class GNote implements CommandExecutor{
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void viewNotes(CommandSender sender, String player) {
         String uuid = getUUID(sender, player);
         ArrayList<String[]> output = dbObj.selectAllNotes("target", uuid);

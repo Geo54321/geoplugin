@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,6 +19,7 @@ public class Playtime implements CommandExecutor {
         this.dbObj = dbObj;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(args.length > 0) {
@@ -40,7 +42,14 @@ public class Playtime implements CommandExecutor {
                         displayTime(sender, uuid);
                     }
                     else {
-                        sender.sendMessage("§cInvalid target player. Please try again.");
+                        try {
+                            OfflinePlayer p = Bukkit.getOfflinePlayer(args[0]);
+                            String uuid = p.getUniqueId().toString();
+                            displayTime(sender, uuid);
+                        }
+                        catch (Exception e) {
+                            sender.sendMessage("§cInvalid player, make sure you typed the username correctly.");
+                        }
                     }
                 }
             }
