@@ -1,5 +1,5 @@
 
-# Current Supported Minecraft Version: 1.21
+# Current Supported Minecraft Version: 1.21.6
 
 ## GeoPlugin
 This is a Minecraft Spigot plugin that adds features we use on the MCNSA community server.

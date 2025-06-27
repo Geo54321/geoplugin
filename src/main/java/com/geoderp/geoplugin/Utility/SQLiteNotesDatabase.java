@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class NotesDatabase {
+public class SQLiteNotesDatabase {
     private Connection db;
     private String dbPath;
     private JavaPlugin Plugin;
 
-    public NotesDatabase(JavaPlugin plugin, String databaseName) {
+    public SQLiteNotesDatabase(JavaPlugin plugin, String databaseName) {
         this.Plugin = plugin;
         dbPath = Plugin.getDataFolder() + File.separator + databaseName;
         connect();

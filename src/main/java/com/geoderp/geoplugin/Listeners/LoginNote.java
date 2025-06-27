@@ -7,16 +7,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.geoderp.geoplugin.Utility.NotesDatabase;
+import com.geoderp.geoplugin.Utility.SQLiteNotesDatabase;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class LoginNote implements Listener {
-    public NotesDatabase dbObj;
+    public SQLiteNotesDatabase dbObj;
     public JavaPlugin plugin;
 
-    public LoginNote(NotesDatabase dbObj, JavaPlugin plugin) {
+    public LoginNote(SQLiteNotesDatabase dbObj, JavaPlugin plugin) {
         this.dbObj = dbObj;
         this.plugin = plugin;
     }

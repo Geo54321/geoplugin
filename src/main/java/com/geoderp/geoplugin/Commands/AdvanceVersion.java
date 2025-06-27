@@ -5,14 +5,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
-import com.geoderp.geoplugin.Utility.NotesDatabase;
+import com.geoderp.geoplugin.Utility.SQLiteNotesDatabase;
 import com.geoderp.geoplugin.Utility.XPDatabase;
 
 public class AdvanceVersion implements CommandExecutor {
-    public NotesDatabase dbObj;
+    public SQLiteNotesDatabase dbObj;
     public XPDatabase xpDB;
     
-    public AdvanceVersion(NotesDatabase dbObj, XPDatabase xpDB) {
+    public AdvanceVersion(SQLiteNotesDatabase dbObj, XPDatabase xpDB) {
         this.dbObj = dbObj;
         this.xpDB = xpDB;
     }

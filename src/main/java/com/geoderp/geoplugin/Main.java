@@ -17,14 +17,14 @@ import com.geoderp.geoplugin.Listeners.DeathXP;
 import com.geoderp.geoplugin.Listeners.LoginNote;
 import com.geoderp.geoplugin.Listeners.PlaytimeTracker;
 import com.geoderp.geoplugin.Listeners.XPKeeperIntercept;
-import com.geoderp.geoplugin.Utility.NotesDatabase;
+import com.geoderp.geoplugin.Utility.SQLiteNotesDatabase;
 import com.geoderp.geoplugin.Utility.XPDatabase;
 
 import java.util.ArrayList;
 import java.io.File;
 
 public class Main extends JavaPlugin {
-    public NotesDatabase notesDB;
+    public SQLiteNotesDatabase notesDB;
     public XPDatabase xpDB;
     public FileConfiguration config = getConfig();
     
@@ -40,7 +40,7 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
         
         // Database setups
-        notesDB = new NotesDatabase(this, "GeoDB.db");
+        notesDB = new SQLiteNotesDatabase(this, "GeoDB.db");
         xpDB = new XPDatabase(this, "GeoXPDB.db");
 
         // GeoInfo Command
@@ -107,6 +107,12 @@ public class Main extends JavaPlugin {
         config.addDefault("options.xp-death-percent-high", 1);
         config.addDefault("options.xp-death-percent-medium", 0.50);
         config.addDefault("options.xp-death-percent-low", 0.25);
+        config.addDefault("database.type", "sqlite");
+        config.addDefault("database.connection.address", "localhost");
+        config.addDefault("database.connection.port", "3306");
+        config.addDefault("database.connection.database", "GeoPlugin");
+        config.addDefault("database.connection.username", "root");
+        config.addDefault("database.connection.password", "");
 
         config.options().copyDefaults(true);
         saveConfig();

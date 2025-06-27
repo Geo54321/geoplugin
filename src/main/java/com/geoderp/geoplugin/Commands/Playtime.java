@@ -10,12 +10,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.geoderp.geoplugin.Utility.NotesDatabase;
+import com.geoderp.geoplugin.Utility.SQLiteNotesDatabase;
 
 public class Playtime implements CommandExecutor {
-    public NotesDatabase dbObj;
+    public SQLiteNotesDatabase dbObj;
     
-    public Playtime(NotesDatabase dbObj) {
+    public Playtime(SQLiteNotesDatabase dbObj) {
         this.dbObj = dbObj;
     }
 
