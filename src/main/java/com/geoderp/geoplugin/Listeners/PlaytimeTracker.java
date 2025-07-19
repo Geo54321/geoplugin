@@ -11,13 +11,13 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.geoderp.geoplugin.Utility.SQLiteNotesDatabase;
+import com.geoderp.geoplugin.Utility.NotesDatabase;
 
 public class PlaytimeTracker implements Listener {
-    public SQLiteNotesDatabase dbObj;
+    public NotesDatabase dbObj;
     public JavaPlugin plugin;
 
-    public PlaytimeTracker(SQLiteNotesDatabase dbObj, JavaPlugin plugin) {
+    public PlaytimeTracker(NotesDatabase dbObj, JavaPlugin plugin) {
         this.dbObj = dbObj;
         this.plugin = plugin;
     }

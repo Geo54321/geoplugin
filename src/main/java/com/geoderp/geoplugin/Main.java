@@ -17,14 +17,14 @@ import com.geoderp.geoplugin.Listeners.DeathXP;
 import com.geoderp.geoplugin.Listeners.LoginNote;
 import com.geoderp.geoplugin.Listeners.PlaytimeTracker;
 import com.geoderp.geoplugin.Listeners.XPKeeperIntercept;
-import com.geoderp.geoplugin.Utility.SQLiteNotesDatabase;
+import com.geoderp.geoplugin.Utility.NotesDatabase;
 import com.geoderp.geoplugin.Utility.XPDatabase;
 
 import java.util.ArrayList;
 import java.io.File;
 
 public class Main extends JavaPlugin {
-    public SQLiteNotesDatabase notesDB;
+    public NotesDatabase notesDB;
     public XPDatabase xpDB;
     public FileConfiguration config = getConfig();
     
@@ -40,7 +40,7 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
         
         // Database setups
-        notesDB = new SQLiteNotesDatabase(this, "GeoDB.db");
+        notesDB = new NotesDatabase(this, "GeoDB.db");
         xpDB = new XPDatabase(this, "GeoXPDB.db");
 
         // GeoInfo Command

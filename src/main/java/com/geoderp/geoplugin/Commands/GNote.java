@@ -8,16 +8,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import com.geoderp.geoplugin.Utility.SQLiteNotesDatabase;
+import com.geoderp.geoplugin.Utility.NotesDatabase;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.UUID;
 
 public class GNote implements CommandExecutor{
-    public SQLiteNotesDatabase dbObj;
+    public NotesDatabase dbObj;
     
-    public GNote(SQLiteNotesDatabase dbObj) {
+    public GNote(NotesDatabase dbObj) {
         this.dbObj = dbObj;
     }
 
